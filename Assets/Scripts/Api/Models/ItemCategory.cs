@@ -1,6 +1,6 @@
 using Newtonsoft.Json;
 
-namespace ExordiumGamesAssignment.Scripts.Api
+namespace ExordiumGamesAssignment.Scripts.Api.Models
 {
     public class ItemCategory
     {

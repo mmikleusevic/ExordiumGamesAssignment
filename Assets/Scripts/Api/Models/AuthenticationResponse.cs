@@ -1,8 +1,8 @@
 using Newtonsoft.Json;
 
-namespace ExordiumGamesAssignment.Scripts.Api
+namespace ExordiumGamesAssignment.Scripts.Api.Models
 {
-    public class ApiResponse
+    public class AuthenticationResponse
     {
         [JsonProperty("isSuccessful")]
         public bool IsSuccessful { get; set; }
