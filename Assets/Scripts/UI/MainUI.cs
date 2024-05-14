@@ -13,8 +13,9 @@ namespace ExordiumGamesAssignment.Scripts.UI
         [SerializeField] private Button settingsButton;
 
         [SerializeField] private ItemsUI itemsUI;
+        [SerializeField] private CategoryUI categoryUI;
+        [SerializeField] private UIManager uIManager;
         [SerializeField] private GameObject bottomUIPart;
-
         private Button activeButton;
 
         private void Awake()
@@ -23,6 +24,7 @@ namespace ExordiumGamesAssignment.Scripts.UI
             {
                 DisableCurrentButtonEnableLast(itemsButton);
                 bottomUIPart.gameObject.SetActive(true);
+                uIManager.ActivateUIElement(itemsUI);
                 StartCoroutine(itemsUI.Instantiate());
             });
 
@@ -30,6 +32,8 @@ namespace ExordiumGamesAssignment.Scripts.UI
             {
                 DisableCurrentButtonEnableLast(categoryButton);
                 bottomUIPart.gameObject.SetActive(true);
+                uIManager.ActivateUIElement(categoryUI);
+                categoryUI.Instantiate();
             });
 
             accountButton.onClick.AddListener(() =>
@@ -54,6 +58,11 @@ namespace ExordiumGamesAssignment.Scripts.UI
             });
 
             bottomUIPart.gameObject.SetActive(false);
+        }
+
+        public void TriggerItems()
+        {
+            itemsButton.onClick.Invoke();
         }
 
         private void DisableCurrentButtonEnableLast(Button newActiveButton)

@@ -9,17 +9,19 @@ namespace ExordiumGamesAssignment.Scripts.UI
 {
     public class ItemsUI : MonoBehaviour
     {
+        private readonly string ITEMS = "Items";
+
         [SerializeField] private TextMeshProUGUI headerText;
         [SerializeField] private Transform container;
         [SerializeField] private Transform template;
         [SerializeField] private ScrollRect scrollRect;
 
-        private bool isLoading = false;
         private int pageNumber = 1;
+        private bool isLoading = false;
 
         private void Awake()
         {
-            headerText.text = gameObject.name;
+            scrollRect.gameObject.SetActive(false);
             template.gameObject.SetActive(false);
         }
 
@@ -30,25 +32,23 @@ namespace ExordiumGamesAssignment.Scripts.UI
 
         private void OnDisable()
         {
-            foreach (Transform child in container)
-            {
-                if (child == template) continue;
-                Destroy(child.gameObject);
-            }
-
-            pageNumber = 1;
-
             scrollRect.onValueChanged.RemoveAllListeners();
         }
 
         public IEnumerator Instantiate()
         {
-            Item[] currentItems = null;
-            yield return StartCoroutine(GameManager.Instance.LoadItems((items) => currentItems = items,pageNumber));
+            headerText.text = ITEMS;
+            Item[] newItems = null;
 
-            if (currentItems == null) yield break;
+            yield return StartCoroutine(GameManager.Instance.LoadItems((items) => newItems = items, pageNumber));
 
-            foreach (Item item in currentItems)
+            if (newItems == null)
+            {
+                FilterItems();
+                yield break;
+            }
+
+            foreach (Item item in newItems)
             {
                 Transform itemUITransform = Instantiate(template, container);
                 itemUITransform.gameObject.SetActive(true);
@@ -61,6 +61,24 @@ namespace ExordiumGamesAssignment.Scripts.UI
 
             yield return new WaitForSeconds(1f);
             isLoading = false;
+        }
+
+        public void FilterItems()
+        {
+            foreach (Transform child in container)
+            {
+                if (child == template) continue;
+
+                CreateItemUI createItemUI = child.GetComponent<CreateItemUI>();
+                if (GameManager.Instance.GetFilterCategoryValue(createItemUI.categoryId))
+                {
+                    createItemUI.gameObject.SetActive(true);
+                }
+                else
+                {
+                    createItemUI.gameObject.SetActive(false);
+                }
+            }
         }
 
         private void OnScrollValueChanged(Vector2 scrollPosition)

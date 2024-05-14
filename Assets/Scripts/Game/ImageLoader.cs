@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Networking;
@@ -9,7 +10,7 @@ namespace ExordiumGamesAssignment.Scripts.Game
     {
         [SerializeField] private Image image;
 
-        public IEnumerator LoadImageFromUrl(string url)
+        public IEnumerator LoadImageFromUrl(Action callback, string url)
         {
             using (UnityWebRequest request = UnityWebRequestTexture.GetTexture(url))
             {
@@ -18,6 +19,7 @@ namespace ExordiumGamesAssignment.Scripts.Game
                 if (request.result != UnityWebRequest.Result.Success)
                 {
                     Debug.Log(request.error);
+                    callback?.Invoke();
                 }
                 else
                 {
@@ -27,10 +29,12 @@ namespace ExordiumGamesAssignment.Scripts.Game
                     {
                         Sprite sprite = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), Vector2.one * 0.5f);
                         image.sprite = sprite;
+                        callback?.Invoke();
                     }
                     else
                     {
                         Debug.LogError("Failed to create sprite: Texture is null.");
+                        callback?.Invoke();
                     }
                 }
             }

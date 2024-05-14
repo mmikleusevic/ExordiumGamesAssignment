@@ -40,9 +40,8 @@ namespace ExordiumGamesAssignment.Scripts.Api.Services
                     string wrappedJsonString = "{\"root\":" + jsonString + "}";
 
                     ItemArrayWrapper wrapper = JsonUtility.FromJson<ItemArrayWrapper>(wrappedJsonString);
-                    Item[] items = wrapper.root;
 
-                    callback?.Invoke(items);
+                    callback?.Invoke(wrapper.root);
                 }
             }
         }
