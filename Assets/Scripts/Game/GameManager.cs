@@ -10,6 +10,7 @@ namespace ExordiumGamesAssignment.Scripts.Game
         public static GameManager Instance { get; private set; }
 
         [SerializeField] private GameObject fetchDataUI;
+        [SerializeField] private GameObject ui;
 
         private RetailerServiceHandler retailerServiceHandler;
         private ItemCategoriesServiceHandler itemCategoriesServiceHandler;
@@ -22,6 +23,7 @@ namespace ExordiumGamesAssignment.Scripts.Game
         {
             Instance = this;
 
+            ui.SetActive(false);
             fetchDataUI.SetActive(true);
 
             itemCategoriesServiceHandler = new ItemCategoriesServiceHandler();
@@ -35,6 +37,7 @@ namespace ExordiumGamesAssignment.Scripts.Game
             yield return itemServiceHandler.GetItems((items) => this.items = items);
             yield return retailerServiceHandler.GetRetailers((retailers) => this.retailers = retailers);
 
+            ui.SetActive(true);
             fetchDataUI.SetActive(false);
         }
 
