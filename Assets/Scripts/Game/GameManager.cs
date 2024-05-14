@@ -1,6 +1,9 @@
 using ExordiumGamesAssignment.Scripts.Api.Models;
 using ExordiumGamesAssignment.Scripts.Api.Services;
+using ExordiumGamesAssignment.Scripts.UI;
+using System;
 using System.Collections;
+using System.Linq;
 using UnityEngine;
 
 namespace ExordiumGamesAssignment.Scripts.Game
@@ -10,7 +13,7 @@ namespace ExordiumGamesAssignment.Scripts.Game
         public static GameManager Instance { get; private set; }
 
         [SerializeField] private GameObject fetchDataUI;
-        [SerializeField] private GameObject ui;
+        [SerializeField] private MainUI mainUI;
 
         private RetailerServiceHandler retailerServiceHandler;
         private ItemCategoriesServiceHandler itemCategoriesServiceHandler;
@@ -23,7 +26,7 @@ namespace ExordiumGamesAssignment.Scripts.Game
         {
             Instance = this;
 
-            ui.SetActive(false);
+            mainUI.gameObject.SetActive(false);
             fetchDataUI.SetActive(true);
 
             itemCategoriesServiceHandler = new ItemCategoriesServiceHandler();
@@ -34,10 +37,10 @@ namespace ExordiumGamesAssignment.Scripts.Game
         private IEnumerator Start()
         {
             yield return itemCategoriesServiceHandler.GetItemCategories((itemCategories) => this.itemCategories = itemCategories);
-            yield return itemServiceHandler.GetItems((items) => this.items = items);
+            yield return itemServiceHandler.GetItems((items) => this.items = items, 1);
             yield return retailerServiceHandler.GetRetailers((retailers) => this.retailers = retailers);
 
-            ui.SetActive(true);
+            mainUI.gameObject.SetActive(true);
             fetchDataUI.SetActive(false);
         }
 
@@ -51,9 +54,25 @@ namespace ExordiumGamesAssignment.Scripts.Game
             return retailers;
         }
 
+        public Retailer GetRetailer(int index)
+        {
+            return retailers.FirstOrDefault(a => a.id == index);
+        }
+
         public ItemCategory[] GetItemCategories()
         {
             return itemCategories;
+        }
+
+        public ItemCategory GetItemCategory(int index)
+        {
+            return itemCategories.FirstOrDefault(a => a.id == index);
+        }
+
+        public IEnumerator LoadItems(Action<Item[]> callback, int pageNumber)
+        {
+            yield return itemServiceHandler.GetItems((items) => this.items = items, pageNumber);
+            callback?.Invoke(items);
         }
     }
 }

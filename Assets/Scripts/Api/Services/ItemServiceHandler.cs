@@ -31,6 +31,12 @@ namespace ExordiumGamesAssignment.Scripts.Api.Services
                 {
                     string jsonString = request.downloadHandler.text;
 
+                    if (!jsonString.Contains("{") && !jsonString.Contains("}"))
+                    {
+                        callback?.Invoke(null);
+                        yield break;
+                    }
+
                     string wrappedJsonString = "{\"root\":" + jsonString + "}";
 
                     ItemArrayWrapper wrapper = JsonUtility.FromJson<ItemArrayWrapper>(wrappedJsonString);
