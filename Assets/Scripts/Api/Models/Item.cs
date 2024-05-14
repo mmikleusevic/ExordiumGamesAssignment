@@ -1,4 +1,3 @@
-using Newtonsoft.Json;
 using System;
 
 namespace ExordiumGamesAssignment.Scripts.Api.Models
@@ -6,25 +5,12 @@ namespace ExordiumGamesAssignment.Scripts.Api.Models
     [Serializable]
     public class Item
     {
-        [JsonProperty("id")]
-        public int Id { get; set; }
-
-        [JsonProperty("name")]
-        public string Name { get; set; }
-
-        [JsonProperty("description")]
-        public string Description { get; set; }
-
-        [JsonProperty("image_url")]
-        public string ImageURL { get; set; }
-
-        [JsonProperty("price")]
-        public decimal Price { get; set; }
-
-        [JsonProperty("retailer_id")]
-        public int RetailerId { get; set; }
-
-        [JsonProperty("item_category_id")]
-        public int ItemCategoryId { get; set; }
+        public int id;
+        public string name;
+        public string description;
+        public string image_url;
+        public decimal price;
+        public int retailer_id;
+        public int item_category_id;
     }
 }
