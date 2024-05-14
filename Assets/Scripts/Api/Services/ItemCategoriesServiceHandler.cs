@@ -8,6 +8,12 @@ namespace ExordiumGamesAssignment.Scripts.Api.Services
 {
     public class ItemCategoriesServiceHandler : ApiServiceHandler
     {
+        [Serializable]
+        private class ItemCategoryArrayWrapper
+        {
+            public ItemCategory[] root;
+        }
+
         public IEnumerator GetItemCategories(Action<ItemCategory[]> callback)
         {
             string uri = baseUrl + "getitemcategories.php";
@@ -24,7 +30,12 @@ namespace ExordiumGamesAssignment.Scripts.Api.Services
                 else
                 {
                     string jsonString = request.downloadHandler.text;
-                    ItemCategory[] itemCategories = JsonUtility.FromJson<ItemCategory[]>(jsonString);
+
+                    string wrappedJsonString = "{\"root\":" + jsonString + "}";
+
+                    ItemCategoryArrayWrapper wrapper = JsonUtility.FromJson<ItemCategoryArrayWrapper>(wrappedJsonString);
+                    ItemCategory[] itemCategories = wrapper.root;
+
                     callback?.Invoke(itemCategories);
                 }
             }

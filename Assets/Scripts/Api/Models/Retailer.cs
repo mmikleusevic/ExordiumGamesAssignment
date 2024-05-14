@@ -1,7 +1,9 @@
 using Newtonsoft.Json;
+using System;
 
 namespace ExordiumGamesAssignment.Scripts.Api.Models
 {
+    [Serializable]
     public class Retailer
     {
         [JsonProperty("id")]

@@ -38,8 +38,8 @@ namespace ExordiumGamesAssignment.Scripts.Api.Services
                 else
                 {
                     string jsonString = request.downloadHandler.text;
-                    AuthenticationResponse apiResponse = JsonUtility.FromJson<AuthenticationResponse>(jsonString);
-                    callback?.Invoke(apiResponse);
+                    AuthenticationResponse authenticationResponse = JsonUtility.FromJson<AuthenticationResponse>(jsonString);
+                    callback?.Invoke(authenticationResponse);
                 }
             }
         }
