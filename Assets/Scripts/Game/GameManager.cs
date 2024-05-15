@@ -12,6 +12,7 @@ namespace ExordiumGamesAssignment.Scripts.Game
     public class GameManager : MonoBehaviour
     {
         private readonly string CATEGORY_ID = "categoryId";
+        private readonly string RETAILER_ID = "retailerId";
 
         public static GameManager Instance { get; private set; }
 
@@ -25,6 +26,7 @@ namespace ExordiumGamesAssignment.Scripts.Game
         private Item[] items;
         private Retailer[] retailers;
         private Dictionary<int, bool> filterCategories;
+        private Dictionary<int, bool> filterRetailers;
 
         private void Awake()
         {
@@ -37,6 +39,7 @@ namespace ExordiumGamesAssignment.Scripts.Game
             itemServiceHandler = new ItemServiceHandler();
             retailerServiceHandler = new RetailerServiceHandler();
             filterCategories = new Dictionary<int, bool>();
+            filterRetailers = new Dictionary<int, bool>();
         }
 
         private IEnumerator Start()
@@ -44,6 +47,7 @@ namespace ExordiumGamesAssignment.Scripts.Game
             yield return itemCategoriesServiceHandler.GetItemCategories((itemCategories) => this.itemCategories = itemCategories);
             yield return SetFilterCategories();
             yield return retailerServiceHandler.GetRetailers((retailers) => this.retailers = retailers);
+            yield return SetFilterRetailers();
 
             mainUI.gameObject.SetActive(true);
             fetchDataUI.SetActive(false);
@@ -52,17 +56,35 @@ namespace ExordiumGamesAssignment.Scripts.Game
 
         private IEnumerator SetFilterCategories()
         {
-            foreach (var category in itemCategories)
+            foreach (ItemCategory itemCategory in itemCategories)
             {
-                if (!PlayerPrefs.HasKey(CATEGORY_ID + category.id))
+                if (!PlayerPrefs.HasKey(CATEGORY_ID + itemCategory.id))
                 {
-                    PlayerPrefs.SetString(CATEGORY_ID + category.id, "true");
+                    PlayerPrefs.SetString(CATEGORY_ID + itemCategory.id, "true");
                 }
 
-                string stringValue = PlayerPrefs.GetString(CATEGORY_ID + category.id);
+                string stringValue = PlayerPrefs.GetString(CATEGORY_ID + itemCategory.id);
                 bool.TryParse(stringValue, out bool value);
 
-                filterCategories.Add(category.id, value);
+                filterCategories.Add(itemCategory.id, value);
+
+                yield return null;
+            }
+        }
+
+        private IEnumerator SetFilterRetailers()
+        {
+            foreach (Retailer retailer in retailers)
+            {
+                if (!PlayerPrefs.HasKey(RETAILER_ID + retailer.id))
+                {
+                    PlayerPrefs.SetString(RETAILER_ID + retailer.id, "true");
+                }
+
+                string stringValue = PlayerPrefs.GetString(RETAILER_ID + retailer.id);
+                bool.TryParse(stringValue, out bool value);
+
+                filterRetailers.Add(retailer.id, value);
 
                 yield return null;
             }
@@ -74,14 +96,20 @@ namespace ExordiumGamesAssignment.Scripts.Game
             filterCategories[id] = value;
         }
 
-        public Dictionary<int, bool> GetFilterCategories()
+        public void UpdateFilterRetailer(int id, bool value)
         {
-            return filterCategories;
+            PlayerPrefs.SetString(RETAILER_ID + id, value.ToString());
+            filterRetailers[id] = value;
         }
 
         public bool GetFilterCategoryValue(int id)
         {
             return filterCategories[id];
+        }
+
+        public bool GetFilterRetailerValue(int id)
+        {
+            return filterRetailers[id];
         }
 
         public Item[] GetItems()
@@ -109,9 +137,9 @@ namespace ExordiumGamesAssignment.Scripts.Game
             return itemCategories.FirstOrDefault(a => a.id == index);
         }
 
-        public IEnumerator LoadItems(Action<Item[]> callback, int pageNumber)
+        public IEnumerator LoadItems(Action<Item[]> callback)
         {
-            yield return itemServiceHandler.GetItems((items) => this.items = items, pageNumber);
+            yield return itemServiceHandler.GetItems((items) => this.items = items);
             callback?.Invoke(items);
         }
     }

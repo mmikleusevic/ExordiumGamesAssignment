@@ -13,11 +13,13 @@ namespace ExordiumGamesAssignment.Scripts.UI
         [SerializeField] private ImageLoader imageLoader;
 
         public int categoryId = -1;
+        public int retailerId = -1;
 
         public void Instantiate(Item item)
         {
-            StartCoroutine(imageLoader.LoadImageFromUrl(() => FilterItem(), item.image_url));
+            StartCoroutine(imageLoader.LoadImageFromUrl(item.image_url, () => FilterItem()));
             categoryId = item.item_category_id;
+            retailerId = item.retailer_id;
             itemNameText.text = item.name;
             priceText.text = item.price.ToString("C");
             itemCategoryNameText.text = GameManager.Instance.GetItemCategory(item.item_category_id).name;
@@ -26,7 +28,7 @@ namespace ExordiumGamesAssignment.Scripts.UI
 
         private void FilterItem()
         {
-            if (GameManager.Instance.GetFilterCategoryValue(categoryId))
+            if (GameManager.Instance.GetFilterCategoryValue(categoryId) && GameManager.Instance.GetFilterRetailerValue(retailerId))
             {
                 gameObject.SetActive(true);
             }

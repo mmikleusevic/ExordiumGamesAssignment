@@ -14,6 +14,7 @@ namespace ExordiumGamesAssignment.Scripts.UI
 
         [SerializeField] private ItemsUI itemsUI;
         [SerializeField] private CategoryUI categoryUI;
+        [SerializeField] private RetailerUI retailerUI;
         [SerializeField] private UIManager uIManager;
         [SerializeField] private GameObject bottomUIPart;
         private Button activeButton;
@@ -45,6 +46,8 @@ namespace ExordiumGamesAssignment.Scripts.UI
             {
                 DisableCurrentButtonEnableLast(retailerButton);
                 bottomUIPart.gameObject.SetActive(true);
+                uIManager.ActivateUIElement(retailerUI);
+                retailerUI.Instantiate();
             });
 
             favoritesButton.onClick.AddListener(() =>

@@ -8,13 +8,15 @@ namespace ExordiumGamesAssignment.Scripts.Api.Services
 {
     public class ItemServiceHandler : ApiServiceHandler
     {
+        public static int pageNumber = 1;
+
         [Serializable]
         private class ItemArrayWrapper
         {
             public Item[] root;
         }
 
-        public IEnumerator GetItems(Action<Item[]> callback, int pageNumber = 1)
+        public IEnumerator GetItems(Action<Item[]> callback)
         {
             string uri = baseUrl + $"getitems.php?pageNumber={pageNumber}";
 
@@ -41,6 +43,7 @@ namespace ExordiumGamesAssignment.Scripts.Api.Services
 
                     ItemArrayWrapper wrapper = JsonUtility.FromJson<ItemArrayWrapper>(wrappedJsonString);
 
+                    pageNumber++;
                     callback?.Invoke(wrapper.root);
                 }
             }

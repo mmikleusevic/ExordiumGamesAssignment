@@ -10,7 +10,7 @@ namespace ExordiumGamesAssignment.Scripts.Game
     {
         [SerializeField] private Image image;
 
-        public IEnumerator LoadImageFromUrl(Action callback, string url)
+        public IEnumerator LoadImageFromUrl(string url, Action callback = default)
         {
             using (UnityWebRequest request = UnityWebRequestTexture.GetTexture(url))
             {

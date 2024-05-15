@@ -6,27 +6,29 @@ using UnityEngine.UI;
 
 namespace ExordiumGamesAssignment.Scripts.UI
 {
-    public class CreateCategoryUI : MonoBehaviour
+    public class CreateRetailerUI : MonoBehaviour
     {
         [SerializeField] private Toggle toggle;
-        [SerializeField] private TextMeshProUGUI itemCategoryText;
+        [SerializeField] private TextMeshProUGUI retailerNameText;
+        [SerializeField] private ImageLoader imageLoader;
 
         private int id;
 
-        public void Instantiate(ItemCategory itemCategory)
+        public void Instantiate(Retailer retailer)
         {
-            id = itemCategory.id;
+            StartCoroutine(imageLoader.LoadImageFromUrl(retailer.image_url));
+            id = retailer.id;
 
             toggle.onValueChanged.AddListener((value) =>
             {
-                GameManager.Instance.UpdateFilterCategory(id, value);
+                GameManager.Instance.UpdateFilterRetailer(id, value);
                 PlayerPrefs.Save();
             });
 
-            bool value = GameManager.Instance.GetFilterCategoryValue(id);
+            bool value = GameManager.Instance.GetFilterRetailerValue(id);
             toggle.isOn = value;
 
-            itemCategoryText.text = itemCategory.name;
+            retailerNameText.text = retailer.name;
         }
 
         private void OnDestroy()

@@ -16,7 +16,6 @@ namespace ExordiumGamesAssignment.Scripts.UI
         [SerializeField] private Transform template;
         [SerializeField] private ScrollRect scrollRect;
 
-        private int pageNumber = 1;
         private bool isLoading = false;
 
         private void Awake()
@@ -40,7 +39,7 @@ namespace ExordiumGamesAssignment.Scripts.UI
             headerText.text = ITEMS;
             Item[] newItems = null;
 
-            yield return StartCoroutine(GameManager.Instance.LoadItems((items) => newItems = items, pageNumber));
+            yield return StartCoroutine(GameManager.Instance.LoadItems((items) => newItems = items));
 
             if (newItems == null)
             {
@@ -57,8 +56,6 @@ namespace ExordiumGamesAssignment.Scripts.UI
                 createItemUI.Instantiate(item);
             }
 
-            pageNumber++;
-
             yield return new WaitForSeconds(1f);
             isLoading = false;
         }
@@ -70,7 +67,7 @@ namespace ExordiumGamesAssignment.Scripts.UI
                 if (child == template) continue;
 
                 CreateItemUI createItemUI = child.GetComponent<CreateItemUI>();
-                if (GameManager.Instance.GetFilterCategoryValue(createItemUI.categoryId))
+                if (GameManager.Instance.GetFilterCategoryValue(createItemUI.categoryId) && GameManager.Instance.GetFilterRetailerValue(createItemUI.retailerId))
                 {
                     createItemUI.gameObject.SetActive(true);
                 }
