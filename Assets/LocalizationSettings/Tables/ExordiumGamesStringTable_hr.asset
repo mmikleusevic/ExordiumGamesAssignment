@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
-  m_Name: ExordiumGamesTable_hr
+  m_Name: ExordiumGamesStringTable_hr
   m_EditorClassIdentifier: 
   m_LocaleId:
     m_Code: hr
@@ -40,6 +40,34 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 421818429440
     m_Localized: Postavke
+    m_Metadata:
+      m_Items: []
+  - m_Id: 19169082241024
+    m_Localized: Croatian
+    m_Metadata:
+      m_Items: []
+  - m_Id: 27455848345600
+    m_Localized: Jezik
+    m_Metadata:
+      m_Items: []
+  - m_Id: 28106015797248
+    m_Localized: Hrvatski
+    m_Metadata:
+      m_Items: []
+  - m_Id: 28675912658944
+    m_Localized: Potvrdi
+    m_Metadata:
+      m_Items: []
+  - m_Id: 28893441847296
+    m_Localized: "Otka\u017Ei"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 53315385061376
+    m_Localized: Hrvatski
+    m_Metadata:
+      m_Items: []
+  - m_Id: 53371458711552
+    m_Localized: Engleski
     m_Metadata:
       m_Items: []
   references:

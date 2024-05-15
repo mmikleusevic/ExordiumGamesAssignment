@@ -2,13 +2,14 @@ using ExordiumGamesAssignment.Scripts.Api.Models;
 using ExordiumGamesAssignment.Scripts.Game;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Localization.Settings;
 using UnityEngine.UI;
 
 namespace ExordiumGamesAssignment.Scripts.UI
 {
     public class CategoryUI : MonoBehaviour
     {
-        private readonly string CATEGORY = "Category";
+        private readonly string CATEGORY = "category";
 
         [SerializeField] private TextMeshProUGUI headerText;
         [SerializeField] private Transform container;
@@ -23,7 +24,7 @@ namespace ExordiumGamesAssignment.Scripts.UI
 
         public void Instantiate()
         {
-            headerText.text = CATEGORY;
+            headerText.text = LocalizationSettings.StringDatabase.GetLocalizedString(LocaleSelector.Instance.STRING_TABLE, CATEGORY);
             scrollRect.gameObject.SetActive(true);
 
             if (container.childCount > 1) return;

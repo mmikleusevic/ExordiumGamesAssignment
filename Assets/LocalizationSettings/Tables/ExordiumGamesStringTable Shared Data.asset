@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5b11a58205ec3474ca216360e9fa74a8, type: 3}
-  m_Name: ExordiumGamesTable Shared Data
+  m_Name: ExordiumGamesStringTable Shared Data
   m_EditorClassIdentifier: 
-  m_TableCollectionName: ExordiumGamesTable
+  m_TableCollectionName: ExordiumGamesStringTable
   m_TableCollectionNameGuidString: 39b6132f8b208d8498bf3412b8f61a36
   m_Entries:
   - m_Id: 54913298432
@@ -37,6 +37,34 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 421818429440
     m_Key: settings
+    m_Metadata:
+      m_Items: []
+  - m_Id: 19169082241024
+    m_Key: languageName
+    m_Metadata:
+      m_Items: []
+  - m_Id: 27455848345600
+    m_Key: language
+    m_Metadata:
+      m_Items: []
+  - m_Id: 28106015797248
+    m_Key: croatian
+    m_Metadata:
+      m_Items: []
+  - m_Id: 28675912658944
+    m_Key: confirm
+    m_Metadata:
+      m_Items: []
+  - m_Id: 28893441847296
+    m_Key: cancel
+    m_Metadata:
+      m_Items: []
+  - m_Id: 53315385061376
+    m_Key: Croatian (hr)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 53371458711552
+    m_Key: English (en)
     m_Metadata:
       m_Items: []
   m_Metadata:

@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
-  m_Name: Localization-String-Tables-English (en)
+  m_Name: Localization-Asset-Tables-English (en)
   m_EditorClassIdentifier: 
-  m_GroupName: Localization-String-Tables-English (en)
+  m_GroupName: Localization-Asset-Tables-English (en)
   m_Data:
     m_SerializedData: []
-  m_GUID: 2c957c84e28213e40ad2ab50f2c82470
+  m_GUID: e580669e3d8367a4794c32e20c090e60
   m_SerializeEntries:
-  - m_GUID: 9b1d33e1f793fb44a9cd41656a3b1b1d
-    m_Address: ExordiumGamesStringTable_en
+  - m_GUID: d80c4dab0a4b25b4fa7d0ff33a278088
+    m_Address: ExordiumGamesAssetTable_en
     m_ReadOnly: 1
     m_SerializedLabels:
     - Locale-en
@@ -28,5 +28,5 @@ MonoBehaviour:
   m_Settings: {fileID: 11400000, guid: 76960079ee7aea54599a375c39d7a795, type: 2}
   m_SchemaSet:
     m_Schemas:
-    - {fileID: 11400000, guid: a3e1ba769854d18458dc650fface1a76, type: 2}
-    - {fileID: 11400000, guid: b04bbfaf008eaa046a98c38c8224318d, type: 2}
+    - {fileID: 11400000, guid: a9eac87ce11b61c4a8795e1f179b78eb, type: 2}
+    - {fileID: 11400000, guid: 517ded82db77c2443b214ea283910059, type: 2}

@@ -18,7 +18,7 @@ MonoBehaviour:
   m_GUID: c5d78f6a376e71a4997834655e75d9b2
   m_SerializeEntries:
   - m_GUID: 07140e1579303cc499e0cb766758a473
-    m_Address: ExordiumGamesTable_hr
+    m_Address: ExordiumGamesStringTable_hr
     m_ReadOnly: 1
     m_SerializedLabels:
     - Locale-hr

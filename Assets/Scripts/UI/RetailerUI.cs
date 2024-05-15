@@ -2,13 +2,14 @@ using ExordiumGamesAssignment.Scripts.Api.Models;
 using ExordiumGamesAssignment.Scripts.Game;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Localization.Settings;
 using UnityEngine.UI;
 
 namespace ExordiumGamesAssignment.Scripts.UI
 {
     public class RetailerUI : MonoBehaviour
     {
-        private readonly string RETAILER = "Retailer";
+        private readonly string RETAILER = "retailer";
 
         [SerializeField] private TextMeshProUGUI headerText;
         [SerializeField] private Transform container;
@@ -23,7 +24,7 @@ namespace ExordiumGamesAssignment.Scripts.UI
 
         public void Instantiate()
         {
-            headerText.text = RETAILER;
+            headerText.text = LocalizationSettings.StringDatabase.GetLocalizedString(LocaleSelector.Instance.STRING_TABLE, RETAILER);
             scrollRect.gameObject.SetActive(true);
 
             if (container.childCount > 1) return;

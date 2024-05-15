@@ -10,23 +10,22 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
-  m_Name: Localization-String-Tables-English (en)
+  m_Name: Localization-Assets-English (en)
   m_EditorClassIdentifier: 
-  m_GroupName: Localization-String-Tables-English (en)
+  m_GroupName: Localization-Assets-English (en)
   m_Data:
     m_SerializedData: []
-  m_GUID: 2c957c84e28213e40ad2ab50f2c82470
+  m_GUID: 9322afc4abbcd6340b5c934a63c18726
   m_SerializeEntries:
-  - m_GUID: 9b1d33e1f793fb44a9cd41656a3b1b1d
-    m_Address: ExordiumGamesStringTable_en
+  - m_GUID: 654096488a2076840802d49707b49da3
+    m_Address: croatianFlag
     m_ReadOnly: 1
     m_SerializedLabels:
     - Locale-en
-    - Preload
     FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 1
   m_Settings: {fileID: 11400000, guid: 76960079ee7aea54599a375c39d7a795, type: 2}
   m_SchemaSet:
     m_Schemas:
-    - {fileID: 11400000, guid: a3e1ba769854d18458dc650fface1a76, type: 2}
-    - {fileID: 11400000, guid: b04bbfaf008eaa046a98c38c8224318d, type: 2}
+    - {fileID: 11400000, guid: a6fcb147d95046d4798d37c927465430, type: 2}
+    - {fileID: 11400000, guid: 1b9b1daf642a9e649b99b44a380ff2f1, type: 2}

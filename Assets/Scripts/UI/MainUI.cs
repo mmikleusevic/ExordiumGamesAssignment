@@ -15,8 +15,12 @@ namespace ExordiumGamesAssignment.Scripts.UI
         [SerializeField] private ItemsUI itemsUI;
         [SerializeField] private CategoryUI categoryUI;
         [SerializeField] private RetailerUI retailerUI;
+        [SerializeField] private SettingsUI settingsUI;
         [SerializeField] private UIManager uIManager;
+
         [SerializeField] private GameObject bottomUIPart;
+        [SerializeField] private GameObject modalWindow;
+
         private Button activeButton;
 
         private void Awake()
@@ -58,9 +62,11 @@ namespace ExordiumGamesAssignment.Scripts.UI
             settingsButton.onClick.AddListener(() =>
             {
                 DisableCurrentButtonEnableLast(settingsButton);
+                bottomUIPart.gameObject.SetActive(true);
+                uIManager.ActivateUIElement(settingsUI);
             });
 
-            bottomUIPart.gameObject.SetActive(false);
+            modalWindow.SetActive(false);
         }
 
         public void TriggerItems()

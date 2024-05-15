@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
-  m_Name: ExordiumGamesTable_en
+  m_Name: ExordiumGamesStringTable_en
   m_EditorClassIdentifier: 
   m_LocaleId:
     m_Code: en
@@ -40,6 +40,34 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 421818429440
     m_Localized: Settings
+    m_Metadata:
+      m_Items: []
+  - m_Id: 19169082241024
+    m_Localized: English
+    m_Metadata:
+      m_Items: []
+  - m_Id: 27455848345600
+    m_Localized: Language
+    m_Metadata:
+      m_Items: []
+  - m_Id: 28106015797248
+    m_Localized: Croatian
+    m_Metadata:
+      m_Items: []
+  - m_Id: 28675912658944
+    m_Localized: Confirm
+    m_Metadata:
+      m_Items: []
+  - m_Id: 28893441847296
+    m_Localized: Cancel
+    m_Metadata:
+      m_Items: []
+  - m_Id: 53315385061376
+    m_Localized: Croatian
+    m_Metadata:
+      m_Items: []
+  - m_Id: 53371458711552
+    m_Localized: English
     m_Metadata:
       m_Items: []
   references:

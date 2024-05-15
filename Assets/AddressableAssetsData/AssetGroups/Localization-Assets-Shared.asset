@@ -22,6 +22,18 @@ MonoBehaviour:
     m_ReadOnly: 1
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: a0e57c44167318e46b8a9a0f5ddd5184
+    m_Address: Assets/LocalizationSettings/Tables/AssetTable Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b135fb56e93259144b71a302649c5329
+    m_Address: englishFlag
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-en
+    - Locale-hr
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 1
   m_Settings: {fileID: 11400000, guid: 76960079ee7aea54599a375c39d7a795, type: 2}
   m_SchemaSet:

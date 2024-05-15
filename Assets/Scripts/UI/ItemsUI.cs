@@ -3,13 +3,14 @@ using ExordiumGamesAssignment.Scripts.Game;
 using System.Collections;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Localization.Settings;
 using UnityEngine.UI;
 
 namespace ExordiumGamesAssignment.Scripts.UI
 {
     public class ItemsUI : MonoBehaviour
     {
-        private readonly string ITEMS = "Items";
+        private readonly string ITEMS = "items";
 
         [SerializeField] private TextMeshProUGUI headerText;
         [SerializeField] private Transform container;
@@ -36,7 +37,7 @@ namespace ExordiumGamesAssignment.Scripts.UI
 
         public IEnumerator Instantiate()
         {
-            headerText.text = ITEMS;
+            headerText.text = LocalizationSettings.StringDatabase.GetLocalizedString(LocaleSelector.Instance.STRING_TABLE, ITEMS);
             Item[] newItems = null;
 
             yield return StartCoroutine(GameManager.Instance.LoadItems((items) => newItems = items));
