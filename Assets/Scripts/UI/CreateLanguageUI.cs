@@ -11,7 +11,7 @@ namespace ExordiumGamesAssignment.Scripts.UI
     public class CreateLanguageUI : MonoBehaviour
     {
         [SerializeField] private TextMeshProUGUI languageNameText;
-        [SerializeField] private Button languageButton;
+        [SerializeField] private Toggle languageToggle;
         [SerializeField] private Image image;
 
         public void Instantiate(Locale locale, int localeId)
@@ -19,7 +19,7 @@ namespace ExordiumGamesAssignment.Scripts.UI
             LocalizedString localizedString = languageNameText.GetComponent<LocalizeStringEvent>().StringReference;
             localizedString.SetReference(LocaleSelector.Instance.STRING_TABLE, locale.LocaleName);
 
-            languageButton.onClick.AddListener(() =>
+            languageToggle.onValueChanged.AddListener((value) =>
             {
                 LocaleSelector.Instance.ChangeLocale(localeId);
             });
