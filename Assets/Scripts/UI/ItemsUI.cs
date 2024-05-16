@@ -23,6 +23,7 @@ namespace ExordiumGamesAssignment.Scripts.UI
         {
             scrollRect.gameObject.SetActive(false);
             template.gameObject.SetActive(false);
+            gameObject.SetActive(false);
         }
 
         private void OnEnable()

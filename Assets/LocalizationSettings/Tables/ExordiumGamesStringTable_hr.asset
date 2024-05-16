@@ -94,6 +94,22 @@ MonoBehaviour:
     m_Localized: Jezik
     m_Metadata:
       m_Items: []
+  - m_Id: 417536127954944
+    m_Localized: Lozinka
+    m_Metadata:
+      m_Items: []
+  - m_Id: 419742851952640
+    m_Localized: Prijava
+    m_Metadata:
+      m_Items: []
+  - m_Id: 420539920707584
+    m_Localized: Registrirajte se
+    m_Metadata:
+      m_Items: []
+  - m_Id: 423908592742400
+    m_Localized: E-mail
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

@@ -28,6 +28,8 @@ namespace ExordiumGamesAssignment.Scripts.UI
             {
                 themeUI.Instantiate();
             });
+
+            gameObject.SetActive(false);
         }
 
         private void OnEnable()

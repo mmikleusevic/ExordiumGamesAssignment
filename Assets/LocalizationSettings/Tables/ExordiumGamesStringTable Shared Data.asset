@@ -91,6 +91,22 @@ MonoBehaviour:
     m_Key: language
     m_Metadata:
       m_Items: []
+  - m_Id: 417536127954944
+    m_Key: password
+    m_Metadata:
+      m_Items: []
+  - m_Id: 419742851952640
+    m_Key: login
+    m_Metadata:
+      m_Items: []
+  - m_Id: 420539920707584
+    m_Key: register
+    m_Metadata:
+      m_Items: []
+  - m_Id: 423908592742400
+    m_Key: email
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

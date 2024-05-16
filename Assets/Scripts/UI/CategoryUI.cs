@@ -20,6 +20,7 @@ namespace ExordiumGamesAssignment.Scripts.UI
         {
             template.gameObject.SetActive(false);
             scrollRect.gameObject.SetActive(false);
+            gameObject.SetActive(false);
         }
 
         public void Instantiate()

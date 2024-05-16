@@ -16,6 +16,7 @@ namespace ExordiumGamesAssignment.Scripts.UI
         [SerializeField] private CategoryUI categoryUI;
         [SerializeField] private RetailerUI retailerUI;
         [SerializeField] private SettingsUI settingsUI;
+        [SerializeField] private AccountUI accountUI;
         [SerializeField] private UIManager uIManager;
 
         [SerializeField] private GameObject bottomUIPart;
@@ -30,7 +31,7 @@ namespace ExordiumGamesAssignment.Scripts.UI
                 DisableCurrentButtonEnableLast(itemsButton);
                 bottomUIPart.gameObject.SetActive(true);
                 StartCoroutine(uIManager.ActivateUIElement(itemsUI, () => StartCoroutine(itemsUI.Instantiate())));
-                
+
             });
 
             categoryButton.onClick.AddListener(() =>
@@ -38,12 +39,14 @@ namespace ExordiumGamesAssignment.Scripts.UI
                 DisableCurrentButtonEnableLast(categoryButton);
                 bottomUIPart.gameObject.SetActive(true);
                 StartCoroutine(uIManager.ActivateUIElement(categoryUI, () => categoryUI.Instantiate()));
-                
+
             });
 
             accountButton.onClick.AddListener(() =>
             {
                 DisableCurrentButtonEnableLast(accountButton);
+                bottomUIPart.gameObject.SetActive(true);
+                StartCoroutine(uIManager.ActivateUIElement(accountUI));
             });
 
             retailerButton.onClick.AddListener(() =>
@@ -51,7 +54,7 @@ namespace ExordiumGamesAssignment.Scripts.UI
                 DisableCurrentButtonEnableLast(retailerButton);
                 bottomUIPart.gameObject.SetActive(true);
                 StartCoroutine(uIManager.ActivateUIElement(retailerUI, () => retailerUI.Instantiate()));
-                
+
             });
 
             favoritesButton.onClick.AddListener(() =>

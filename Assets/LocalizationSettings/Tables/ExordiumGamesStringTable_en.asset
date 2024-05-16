@@ -94,6 +94,22 @@ MonoBehaviour:
     m_Localized: Language
     m_Metadata:
       m_Items: []
+  - m_Id: 417536127954944
+    m_Localized: Password
+    m_Metadata:
+      m_Items: []
+  - m_Id: 419742851952640
+    m_Localized: Login
+    m_Metadata:
+      m_Items: []
+  - m_Id: 420539920707584
+    m_Localized: Register
+    m_Metadata:
+      m_Items: []
+  - m_Id: 423908592742400
+    m_Localized: Email
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []
