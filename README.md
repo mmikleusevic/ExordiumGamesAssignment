@@ -2,14 +2,6 @@ External Plugins: <br> &nbsp;&nbsp;&nbsp;&nbsp; <a href="https://assetstore.unit
 
 # Unity Programmer Assignment
 
-# Introduction
-
-Welcome, and thank you for applying for this position at Exordium Games!
-
-This assignment consists of creating a Unity application. It will test your knowledge, capabilities, and good practices in creating a simple data management system.
-
-Please read the entire document carefully before you start the assignment. Good luck!
-
 # 1\. Introduction
 
 Assume there is a backend server with the data and functionality required to communicate with the Unity application.
@@ -228,15 +220,6 @@ On the Item screen, the item can be added and removed to Favorites by pressing t
 On the Favorites screen, the item can only be removed from the Favorites by pressing the Favorite button.
 
 Save the items set as Favorite by their item ID using Unity’s PlayerPrefs or a similar principle to store the data on the user’s device.
-
-#
-
-# Repository
-
-- **Create 1** **private** [GitHub](https://github.com/) repository containing your content for this assignment.
-- Commit, and push all the minimum relevant files to the repository
-- Maintain a branch named “development” where all features will be merged when completed
-- Before submitting the assignment, merge the “development” branch into a “production” branch
 
 # Syntax instructions
 
