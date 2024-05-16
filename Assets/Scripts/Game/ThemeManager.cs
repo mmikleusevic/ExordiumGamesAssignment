@@ -98,8 +98,8 @@ namespace ExordiumGamesAssignment.Scripts.Game
                 ColorBlock colors = button.colors;
                 colors.normalColor = color;
                 colors.highlightedColor = color;
-                colors.selectedColor = Color.white;
-                colors.disabledColor = color;
+                colors.selectedColor = Color.gray;
+                colors.disabledColor = Color.gray;
                 button.colors = colors;
             }
 
@@ -109,7 +109,7 @@ namespace ExordiumGamesAssignment.Scripts.Game
                 colors.normalColor = color;
                 colors.highlightedColor = color;
                 colors.selectedColor = Color.gray;
-                colors.disabledColor = color;
+                colors.disabledColor = Color.gray;
                 toggle.colors = colors;
             }
         }

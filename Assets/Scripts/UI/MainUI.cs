@@ -29,16 +29,16 @@ namespace ExordiumGamesAssignment.Scripts.UI
             {
                 DisableCurrentButtonEnableLast(itemsButton);
                 bottomUIPart.gameObject.SetActive(true);
-                uIManager.ActivateUIElement(itemsUI);
-                StartCoroutine(itemsUI.Instantiate());
+                StartCoroutine(uIManager.ActivateUIElement(itemsUI, () => StartCoroutine(itemsUI.Instantiate())));
+                
             });
 
             categoryButton.onClick.AddListener(() =>
             {
                 DisableCurrentButtonEnableLast(categoryButton);
                 bottomUIPart.gameObject.SetActive(true);
-                uIManager.ActivateUIElement(categoryUI);
-                categoryUI.Instantiate();
+                StartCoroutine(uIManager.ActivateUIElement(categoryUI, () => categoryUI.Instantiate()));
+                
             });
 
             accountButton.onClick.AddListener(() =>
@@ -50,8 +50,8 @@ namespace ExordiumGamesAssignment.Scripts.UI
             {
                 DisableCurrentButtonEnableLast(retailerButton);
                 bottomUIPart.gameObject.SetActive(true);
-                uIManager.ActivateUIElement(retailerUI);
-                retailerUI.Instantiate();
+                StartCoroutine(uIManager.ActivateUIElement(retailerUI, () => retailerUI.Instantiate()));
+                
             });
 
             favoritesButton.onClick.AddListener(() =>
@@ -63,14 +63,16 @@ namespace ExordiumGamesAssignment.Scripts.UI
             {
                 DisableCurrentButtonEnableLast(settingsButton);
                 bottomUIPart.gameObject.SetActive(true);
-                uIManager.ActivateUIElement(settingsUI);
+                StartCoroutine(uIManager.ActivateUIElement(settingsUI));
             });
 
             modalWindow.SetActive(false);
+            gameObject.SetActive(false);
         }
 
         public void TriggerItems()
         {
+            gameObject.SetActive(true);
             itemsButton.onClick.Invoke();
         }
 

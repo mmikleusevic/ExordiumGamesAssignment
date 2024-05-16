@@ -32,7 +32,6 @@ namespace ExordiumGamesAssignment.Scripts.Game
         {
             Instance = this;
 
-            mainUI.gameObject.SetActive(false);
             fetchDataUI.SetActive(true);
 
             itemCategoriesServiceHandler = new ItemCategoriesServiceHandler();
@@ -49,7 +48,6 @@ namespace ExordiumGamesAssignment.Scripts.Game
             yield return retailerServiceHandler.GetRetailers((retailers) => this.retailers = retailers);
             yield return SetFilterRetailers();
 
-            mainUI.gameObject.SetActive(true);
             fetchDataUI.SetActive(false);
             mainUI.TriggerItems();
         }
