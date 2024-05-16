@@ -38,7 +38,6 @@ namespace ExordiumGamesAssignment.Scripts.UI
             });
 
             template.gameObject.SetActive(false);
-            ToggleObjects(false);
         }
 
         private void Start()
@@ -75,7 +74,7 @@ namespace ExordiumGamesAssignment.Scripts.UI
             }
         }
 
-        private void ToggleObjects(bool value)
+        public void ToggleObjects(bool value)
         {
             foreach (GameObject gObject in gameObjectsToToggle)
             {

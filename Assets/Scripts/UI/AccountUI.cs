@@ -14,52 +14,117 @@ namespace ExordiumGamesAssignment.Scripts.UI
         [SerializeField] private TextMeshProUGUI headerText;
         [SerializeField] private Button registerButton;
         [SerializeField] private Button loginButton;
+        [SerializeField] private Button logoutButton;
         [SerializeField] private TMP_InputField emailInputField;
         [SerializeField] private TMP_InputField passwordInputField;
+        [SerializeField] private TextMeshProUGUI emailText;
+        [SerializeField] private TextMeshProUGUI passwordText;
+        [SerializeField] private TextMeshProUGUI usernameText;
+        [SerializeField] private CreateAccountUI createAccountUI;
 
-        private AuthenticationResponse authenticationResponse;
+        private int minEmailLength = 6;
+        private int minPasswordLength = 1;
 
         private void Awake()
         {
             registerButton.onClick.AddListener(() =>
             {
-                if (emailInputField.text.Length < 6 && passwordInputField.text.Length <= 1) return;
+                if (emailInputField.text.Length < minEmailLength || passwordInputField.text.Length < minPasswordLength) return;
 
-                StartCoroutine(GameManager.Instance.Register((authenticationResponse) =>
-                {
-                    this.authenticationResponse = authenticationResponse;
-                }, 
-                new User(emailInputField.text, passwordInputField.text)));
+                StartCoroutine(GameManager.Instance.Register(HandleRegisterResponse, new User(emailInputField.text, passwordInputField.text)));
             });
 
             loginButton.onClick.AddListener(() =>
             {
-                if (emailInputField.text.Length < 6 && passwordInputField.text.Length <= 1) return;
+                if (emailInputField.text.Length < minEmailLength || passwordInputField.text.Length < minPasswordLength) return;
 
-                StartCoroutine(GameManager.Instance.Login((authenticationResponse) =>
-                {
-                    this.authenticationResponse = authenticationResponse;
-                },
-                new User(emailInputField.text, passwordInputField.text)));
+                StartCoroutine(GameManager.Instance.Login(HandleLoginResponse, new User(emailInputField.text, passwordInputField.text)));
             });
 
+            logoutButton.onClick.AddListener(() => Logout());
+
+            logoutButton.gameObject.SetActive(false);
+            usernameText.gameObject.SetActive(false);
             gameObject.SetActive(false);
         }
 
         private void OnEnable()
         {
+            createAccountUI.OnLoginSuccess += CreateAccountUI_OnLoginSuccess;
+
             LocalizeHeaderText();
+        }
+
+        private void OnDisable()
+        {
+            createAccountUI.OnLoginSuccess -= CreateAccountUI_OnLoginSuccess;
         }
 
         private void OnDestroy()
         {
             registerButton.onClick.RemoveAllListeners();
             loginButton.onClick.RemoveAllListeners();
+            logoutButton.onClick.RemoveAllListeners();
+        }
+
+        private void CreateAccountUI_OnLoginSuccess()
+        {
+            registerButton.gameObject.SetActive(false);
+            loginButton.gameObject.SetActive(false);
+            emailInputField.gameObject.SetActive(false);
+            passwordInputField.gameObject.SetActive(true);
+            emailText.gameObject.SetActive(false);
+            passwordText.gameObject.SetActive(false);
+
+            logoutButton.gameObject.SetActive(true);
+            usernameText.gameObject.SetActive(true);
+            usernameText.text = emailInputField.text;
         }
 
         public void LocalizeHeaderText()
         {
             headerText.text = LocalizationSettings.StringDatabase.GetLocalizedString(LocaleSelector.Instance.STRING_TABLE, ACCOUNT);
-        }      
+        }
+
+        private void HandleRegisterResponse(AuthenticationResponse authenticationResponse)
+        {
+            if (authenticationResponse == null) return;
+
+            if (authenticationResponse.isSuccessful == false)
+            {
+                createAccountUI.Instantiate(authenticationResponse.message, AuthResponse.REGISTER_FAILURE);
+            }
+            else
+            {
+                createAccountUI.Instantiate(authenticationResponse.message, AuthResponse.REGISTER_SUCCESS);
+            }
+        }
+
+        private void HandleLoginResponse(AuthenticationResponse authenticationResponse)
+        {
+            if (authenticationResponse == null) return;
+
+            if (authenticationResponse.isSuccessful == false)
+            {
+                createAccountUI.Instantiate(authenticationResponse.message, AuthResponse.LOGIN_FAILURE);
+            }
+            else
+            {
+                createAccountUI.Instantiate(authenticationResponse.message, AuthResponse.LOGIN_SUCCESS);
+            }
+        }
+
+        private void Logout()
+        {
+            registerButton.gameObject.SetActive(true);
+            loginButton.gameObject.SetActive(true);
+            emailInputField.gameObject.SetActive(true);
+            passwordInputField.gameObject.SetActive(true);
+            emailText.gameObject.SetActive(true);
+            passwordText.gameObject.SetActive(true);
+
+            logoutButton.gameObject.SetActive(false);
+            usernameText.gameObject.SetActive(false);
+        }
     }
 }

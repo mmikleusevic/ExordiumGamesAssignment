@@ -16,7 +16,6 @@ namespace ExordiumGamesAssignment.Scripts.UI
         [SerializeField] private LanguageUI languageUI;
         [SerializeField] private ThemeUI themeUI;
 
-
         private void Awake()
         {
             languageSettingsButton.onClick.AddListener(() =>
@@ -29,6 +28,8 @@ namespace ExordiumGamesAssignment.Scripts.UI
                 themeUI.Instantiate();
             });
 
+            languageUI.ToggleObjects(false);
+            themeUI.ToggleObjects(false);
             gameObject.SetActive(false);
         }
 

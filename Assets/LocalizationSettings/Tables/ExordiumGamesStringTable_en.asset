@@ -103,11 +103,43 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 420539920707584
-    m_Localized: Register
+    m_Localized: Logout
     m_Metadata:
       m_Items: []
   - m_Id: 423908592742400
     m_Localized: Email
+    m_Metadata:
+      m_Items: []
+  - m_Id: 497476072534016
+    m_Localized: Invalid email or password.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 497593143947264
+    m_Localized: Welcome
+    m_Metadata:
+      m_Items: []
+  - m_Id: 497633061138432
+    m_Localized: Retry
+    m_Metadata:
+      m_Items: []
+  - m_Id: 497712971018240
+    m_Localized: Logout
+    m_Metadata:
+      m_Items: []
+  - m_Id: 498238471172096
+    m_Localized: Account created.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 498342313750528
+    m_Localized: Continue
+    m_Metadata:
+      m_Items: []
+  - m_Id: 518256625872896
+    m_Localized: Email taken.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 524815451975680
+    m_Localized: Register
     m_Metadata:
       m_Items: []
   references:

@@ -153,7 +153,7 @@ namespace ExordiumGamesAssignment.Scripts.Game
         }
         public IEnumerator Login(Action<AuthenticationResponse> callback, User user)
         {
-            yield return StartCoroutine(userServiceHandler.LoginOrRegister((authenticationResponse) => callback?.Invoke(authenticationResponse), user, false));        
+            yield return StartCoroutine(userServiceHandler.LoginOrRegister((authenticationResponse) => callback?.Invoke(authenticationResponse), user, false));
         }
     }
 }

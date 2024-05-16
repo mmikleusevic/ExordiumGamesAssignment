@@ -31,8 +31,6 @@ namespace ExordiumGamesAssignment.Scripts.UI
                 ThemeManager.Instance.Cancel();
                 ToggleObjects(false);
             });
-
-            ToggleObjects(false);
         }
 
         private void Start()
@@ -54,7 +52,7 @@ namespace ExordiumGamesAssignment.Scripts.UI
             headerText.text = LocalizationSettings.StringDatabase.GetLocalizedString(LocaleSelector.Instance.STRING_TABLE, THEME);
         }
 
-        private void ToggleObjects(bool value)
+        public void ToggleObjects(bool value)
         {
             foreach (GameObject gObject in gameObjectsToToggle)
             {

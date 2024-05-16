@@ -103,11 +103,43 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 420539920707584
-    m_Localized: Registrirajte se
+    m_Localized: Odjavi se
     m_Metadata:
       m_Items: []
   - m_Id: 423908592742400
     m_Localized: E-mail
+    m_Metadata:
+      m_Items: []
+  - m_Id: 497476072534016
+    m_Localized: "Neva\u017Ee\u0107a adresa e-po\u0161te ili lozinka."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 497593143947264
+    m_Localized: "Dobrodo\u0161li"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 497633061138432
+    m_Localized: "Poku\u0161aj ponovno"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 497712971018240
+    m_Localized: Odjavi se
+    m_Metadata:
+      m_Items: []
+  - m_Id: 498238471172096
+    m_Localized: "Ra\u010Dun kreiran."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 498342313750528
+    m_Localized: Nastavi
+    m_Metadata:
+      m_Items: []
+  - m_Id: 518256625872896
+    m_Localized: E-mail zauzet.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 524815451975680
+    m_Localized: Registriraj se
     m_Metadata:
       m_Items: []
   references:
