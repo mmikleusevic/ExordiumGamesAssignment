@@ -9,9 +9,11 @@ public class UserSettingsManager : MonoBehaviour
 
     private const string SelectedCategoriesKey = "SelectedCategories";
     private const string SelectedRetailersKey = "SelectedRetailers";
+    private const string SelectedFavoritesKey = "SelectedFavorites";
 
     private Dictionary<int, bool> filterCategories;
     private Dictionary<int, bool> filterRetailers;
+    private List<int> filterFavorites;
 
     private string username;
 
@@ -21,6 +23,7 @@ public class UserSettingsManager : MonoBehaviour
 
         filterCategories = new Dictionary<int, bool>();
         filterRetailers = new Dictionary<int, bool>();
+        filterFavorites = new List<int>();
     }
 
     public void SaveSelectedUserRetailersSettings()
@@ -39,6 +42,14 @@ public class UserSettingsManager : MonoBehaviour
         PlayerPrefs.Save();
     }
 
+    public void SaveSelectedUserFavoritesSettings()
+    {
+        string selectedFavoritesJson = JsonUtility.ToJson(filterFavorites);
+
+        PlayerPrefs.SetString(SelectedFavoritesKey + username, selectedFavoritesJson);
+        PlayerPrefs.Save();
+    }
+
     public void UpdateFilterCategory(int id, bool value)
     {
         filterCategories[id] = value;
@@ -47,6 +58,11 @@ public class UserSettingsManager : MonoBehaviour
     public void UpdateFilterRetailer(int id, bool value)
     {
         filterRetailers[id] = value;
+    }
+
+    public void UpdateFavorite(int id)
+    {
+        filterFavorites.Add(id);
     }
 
     public void LoadDefaultSettings()
@@ -65,6 +81,8 @@ public class UserSettingsManager : MonoBehaviour
         {
             filterRetailers.Add(retailer.id, true);
         }
+
+        filterFavorites.Clear();
     }
 
     public void LoadUserSettings(string username)
@@ -76,6 +94,9 @@ public class UserSettingsManager : MonoBehaviour
 
         string selectedRetailersJson = PlayerPrefs.GetString(SelectedRetailersKey + username);
         filterRetailers = JsonUtility.FromJson<Dictionary<int, bool>>(selectedRetailersJson);
+
+        string selectedFavoritesJson = PlayerPrefs.GetString(SelectedFavoritesKey + username);
+        filterFavorites = JsonUtility.FromJson<List<int>>(selectedFavoritesJson);
     }
 
     public bool GetFilterCategoryValue(int id)
@@ -86,5 +107,15 @@ public class UserSettingsManager : MonoBehaviour
     public bool GetFilterRetailerValue(int id)
     {
         return filterRetailers[id];
+    }
+
+    public bool GetFilterFavoriteValue(int id)
+    {
+        return filterFavorites.Contains(id);
+    }
+
+    public List<int> GetFavorites()
+    {
+        return filterFavorites;
     }
 }

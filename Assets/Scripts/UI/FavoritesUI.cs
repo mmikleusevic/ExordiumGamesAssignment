@@ -9,6 +9,11 @@ public class FavoritesUI : ItemsUI
 {
     private readonly string FAVORITES = "favorites";
 
+    private void OnDisable()
+    {
+        UserSettingsManager.Instance.SaveSelectedUserFavoritesSettings();
+    }
+
     public override IEnumerator Instantiate()
     {
         headerText.text = LocalizationSettings.StringDatabase.GetLocalizedString(LocaleSelector.Instance.STRING_TABLE, FAVORITES);
