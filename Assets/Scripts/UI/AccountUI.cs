@@ -79,6 +79,8 @@ namespace ExordiumGamesAssignment.Scripts.UI
             logoutButton.gameObject.SetActive(true);
             usernameText.gameObject.SetActive(true);
             usernameText.text = emailInputField.text;
+
+            UserSettingsManager.Instance.LoadUserSettings(emailInputField.text);
         }
 
         public void LocalizeHeaderText()
@@ -125,6 +127,8 @@ namespace ExordiumGamesAssignment.Scripts.UI
 
             logoutButton.gameObject.SetActive(false);
             usernameText.gameObject.SetActive(false);
+
+            UserSettingsManager.Instance.LoadDefaultSettings();
         }
     }
 }

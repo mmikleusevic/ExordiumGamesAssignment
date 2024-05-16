@@ -19,11 +19,10 @@ namespace ExordiumGamesAssignment.Scripts.UI
 
             toggle.onValueChanged.AddListener((value) =>
             {
-                GameManager.Instance.UpdateFilterCategory(id, value);
-                PlayerPrefs.Save();
+                UserSettingsManager.Instance.UpdateFilterCategory(id, value);
             });
 
-            bool value = GameManager.Instance.GetFilterCategoryValue(id);
+            bool value = UserSettingsManager.Instance.GetFilterCategoryValue(id);
             toggle.isOn = value;
 
             itemCategoryText.text = itemCategory.name;

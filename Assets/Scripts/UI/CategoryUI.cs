@@ -23,6 +23,11 @@ namespace ExordiumGamesAssignment.Scripts.UI
             gameObject.SetActive(false);
         }
 
+        private void OnDisable()
+        {
+            UserSettingsManager.Instance.SaveSelectedUserCategoriesSettings();
+        }
+
         public void Instantiate()
         {
             headerText.text = LocalizationSettings.StringDatabase.GetLocalizedString(LocaleSelector.Instance.STRING_TABLE, CATEGORY);

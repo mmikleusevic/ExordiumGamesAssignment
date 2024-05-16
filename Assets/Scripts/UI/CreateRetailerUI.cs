@@ -21,11 +21,10 @@ namespace ExordiumGamesAssignment.Scripts.UI
 
             toggle.onValueChanged.AddListener((value) =>
             {
-                GameManager.Instance.UpdateFilterRetailer(id, value);
-                PlayerPrefs.Save();
+                UserSettingsManager.Instance.UpdateFilterRetailer(id, value);
             });
 
-            bool value = GameManager.Instance.GetFilterRetailerValue(id);
+            bool value = UserSettingsManager.Instance.GetFilterRetailerValue(id);
             toggle.isOn = value;
 
             retailerNameText.text = retailer.name;

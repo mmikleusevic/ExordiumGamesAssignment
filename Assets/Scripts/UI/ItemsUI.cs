@@ -12,10 +12,10 @@ namespace ExordiumGamesAssignment.Scripts.UI
     {
         private readonly string ITEMS = "items";
 
-        [SerializeField] private TextMeshProUGUI headerText;
-        [SerializeField] private Transform container;
-        [SerializeField] private Transform template;
-        [SerializeField] private ScrollRect scrollRect;
+        [SerializeField] protected TextMeshProUGUI headerText;
+        [SerializeField] protected Transform container;
+        [SerializeField] protected Transform template;
+        [SerializeField] protected ScrollRect scrollRect;
 
         private bool isLoading = false;
 
@@ -36,7 +36,7 @@ namespace ExordiumGamesAssignment.Scripts.UI
             scrollRect.onValueChanged.RemoveAllListeners();
         }
 
-        public IEnumerator Instantiate()
+        public virtual IEnumerator Instantiate()
         {
             headerText.text = LocalizationSettings.StringDatabase.GetLocalizedString(LocaleSelector.Instance.STRING_TABLE, ITEMS);
             Item[] newItems = null;
@@ -69,7 +69,7 @@ namespace ExordiumGamesAssignment.Scripts.UI
                 if (child == template) continue;
 
                 CreateItemUI createItemUI = child.GetComponent<CreateItemUI>();
-                if (GameManager.Instance.GetFilterCategoryValue(createItemUI.categoryId) && GameManager.Instance.GetFilterRetailerValue(createItemUI.retailerId))
+                if (UserSettingsManager.Instance.GetFilterCategoryValue(createItemUI.categoryId) && UserSettingsManager.Instance.GetFilterRetailerValue(createItemUI.retailerId))
                 {
                     createItemUI.gameObject.SetActive(true);
                 }

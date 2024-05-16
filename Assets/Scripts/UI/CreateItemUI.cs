@@ -40,7 +40,7 @@ namespace ExordiumGamesAssignment.Scripts.UI
 
         private void FilterItem()
         {
-            if (GameManager.Instance.GetFilterCategoryValue(categoryId) && GameManager.Instance.GetFilterRetailerValue(retailerId))
+            if (UserSettingsManager.Instance.GetFilterCategoryValue(categoryId) && UserSettingsManager.Instance.GetFilterRetailerValue(retailerId))
             {
                 gameObject.SetActive(true);
             }
