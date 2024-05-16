@@ -22,9 +22,12 @@ namespace ExordiumGamesAssignment.Scripts.Game
         private RetailerServiceHandler retailerServiceHandler;
         private ItemCategoriesServiceHandler itemCategoriesServiceHandler;
         private ItemServiceHandler itemServiceHandler;
+        private UserServiceHandler userServiceHandler;
+
         private ItemCategory[] itemCategories;
         private Item[] items;
         private Retailer[] retailers;
+
         private Dictionary<int, bool> filterCategories;
         private Dictionary<int, bool> filterRetailers;
 
@@ -37,6 +40,8 @@ namespace ExordiumGamesAssignment.Scripts.Game
             itemCategoriesServiceHandler = new ItemCategoriesServiceHandler();
             itemServiceHandler = new ItemServiceHandler();
             retailerServiceHandler = new RetailerServiceHandler();
+            userServiceHandler = new UserServiceHandler();
+
             filterCategories = new Dictionary<int, bool>();
             filterRetailers = new Dictionary<int, bool>();
         }
@@ -139,6 +144,16 @@ namespace ExordiumGamesAssignment.Scripts.Game
         {
             yield return itemServiceHandler.GetItems((items) => this.items = items);
             callback?.Invoke(items);
+        }
+
+        public IEnumerator Register(Action<AuthenticationResponse> callback, User user)
+        {
+            yield return StartCoroutine(userServiceHandler.LoginOrRegister((authenticationResponse) => callback?.Invoke(authenticationResponse), user, true));
+
+        }
+        public IEnumerator Login(Action<AuthenticationResponse> callback, User user)
+        {
+            yield return StartCoroutine(userServiceHandler.LoginOrRegister((authenticationResponse) => callback?.Invoke(authenticationResponse), user, false));        
         }
     }
 }
