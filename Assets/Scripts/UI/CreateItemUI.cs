@@ -1,7 +1,9 @@
 using ExordiumGamesAssignment.Scripts.Api.Models;
 using ExordiumGamesAssignment.Scripts.Game;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 namespace ExordiumGamesAssignment.Scripts.UI
 {
     public class CreateItemUI : MonoBehaviour
@@ -24,6 +26,16 @@ namespace ExordiumGamesAssignment.Scripts.UI
             priceText.text = item.price.ToString("C");
             itemCategoryNameText.text = GameManager.Instance.GetItemCategory(item.item_category_id).name;
             retailerNameText.text = GameManager.Instance.GetRetailer(item.retailer_id).name;
+
+            ThemeManager.Instance.AddImage(GetComponent<Image>());
+            ThemeManager.Instance.AddOutline(GetComponent<Outline>());
+            ThemeManager.Instance.AddTextElements(new List<TextMeshProUGUI>
+            {
+                itemNameText,
+                retailerNameText,
+                priceText,
+                itemCategoryNameText,
+            });
         }
 
         private void FilterItem()

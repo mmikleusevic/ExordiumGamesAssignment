@@ -70,6 +70,30 @@ MonoBehaviour:
     m_Localized: English
     m_Metadata:
       m_Items: []
+  - m_Id: 146953607737344
+    m_Localized: Theme
+    m_Metadata:
+      m_Items: []
+  - m_Id: 162373156892672
+    m_Localized: Dark Theme
+    m_Metadata:
+      m_Items: []
+  - m_Id: 162540262158336
+    m_Localized: Light Theme
+    m_Metadata:
+      m_Items: []
+  - m_Id: 163858292830208
+    m_Localized: Light
+    m_Metadata:
+      m_Items: []
+  - m_Id: 163933605752832
+    m_Localized: Dark
+    m_Metadata:
+      m_Items: []
+  - m_Id: 166536494346240
+    m_Localized: Language
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

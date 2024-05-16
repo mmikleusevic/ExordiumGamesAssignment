@@ -20,23 +20,25 @@ namespace ExordiumGamesAssignment.Scripts.UI
         [SerializeField] private Transform template;
         [SerializeField] private ScrollRect scrollRect;
         [SerializeField] private SettingsUI settingsUI;
+        [SerializeField] private GameObject[] gameObjectsToToggle;
 
         private void Awake()
         {
             confirmButton.onClick.AddListener(() =>
             {
                 LocaleSelector.Instance.SaveDefaultLocale();
-                settingsUI.ToggleObjects(false);
+                ToggleObjects(false);
                 settingsUI.LocalizeHeaderText();
             });
 
             cancelButton.onClick.AddListener(() =>
             {
                 LocaleSelector.Instance.Cancel();
-                settingsUI.ToggleObjects(false);
+                ToggleObjects(false);
             });
 
             template.gameObject.SetActive(false);
+            ToggleObjects(false);
         }
 
         private void Start()
@@ -53,6 +55,8 @@ namespace ExordiumGamesAssignment.Scripts.UI
 
         public void Instantiate()
         {
+            ToggleObjects(true);
+
             headerText.text = LocalizationSettings.StringDatabase.GetLocalizedString(LocaleSelector.Instance.STRING_TABLE, LANGUAGE);
             scrollRect.gameObject.SetActive(true);
 
@@ -68,6 +72,14 @@ namespace ExordiumGamesAssignment.Scripts.UI
                 createLanguageUI.Instantiate(locale, localeId);
 
                 localeId++;
+            }
+        }
+
+        private void ToggleObjects(bool value)
+        {
+            foreach (GameObject gObject in gameObjectsToToggle)
+            {
+                gObject.SetActive(value);
             }
         }
     }

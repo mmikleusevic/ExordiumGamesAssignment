@@ -27,6 +27,9 @@ namespace ExordiumGamesAssignment.Scripts.UI
             toggle.isOn = value;
 
             itemCategoryText.text = itemCategory.name;
+
+            ThemeManager.Instance.AddTextElement(itemCategoryText);
+            ThemeManager.Instance.AddToggle(toggle);
         }
 
         private void OnDestroy()

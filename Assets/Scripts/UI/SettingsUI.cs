@@ -1,5 +1,4 @@
 using ExordiumGamesAssignment.Scripts.Game;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Localization.Settings;
@@ -13,15 +12,21 @@ namespace ExordiumGamesAssignment.Scripts.UI
 
         [SerializeField] private TextMeshProUGUI headerText;
         [SerializeField] private Button languageSettingsButton;
-        [SerializeField] private List<GameObject> gameObjectsToEnable;
+        [SerializeField] private Button themeSettingsButton;
         [SerializeField] private LanguageUI languageUI;
+        [SerializeField] private ThemeUI themeUI;
+
 
         private void Awake()
         {
             languageSettingsButton.onClick.AddListener(() =>
             {
-                ToggleObjects(true);
                 languageUI.Instantiate();
+            });
+
+            themeSettingsButton.onClick.AddListener(() =>
+            {
+                themeUI.Instantiate();
             });
         }
 
@@ -33,14 +38,6 @@ namespace ExordiumGamesAssignment.Scripts.UI
         private void OnDestroy()
         {
             languageSettingsButton.onClick.RemoveAllListeners();
-        }
-
-        public void ToggleObjects(bool value)
-        {
-            foreach (GameObject gObject in gameObjectsToEnable)
-            {
-                gObject.SetActive(value);
-            }
         }
 
         public void LocalizeHeaderText()
