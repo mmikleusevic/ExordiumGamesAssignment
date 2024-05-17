@@ -24,7 +24,6 @@ namespace ExordiumGamesAssignment.Scripts.UI
 
         private void Start()
         {
-
             UserSettingsManager.Instance.OnFiltersChanged += UserSettingsManager_OnFiltersChanged;
 
             gameObject.SetActive(false);

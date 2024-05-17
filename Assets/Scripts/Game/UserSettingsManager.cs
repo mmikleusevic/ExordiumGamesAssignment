@@ -1,4 +1,5 @@
 using ExordiumGamesAssignment.Scripts.Api.Models;
+using ExordiumGamesAssignment.Scripts.UI;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -90,7 +91,6 @@ namespace ExordiumGamesAssignment.Scripts.Game
         private void LoadDefaultCategories()
         {
             ItemCategory[] itemCategories = GameManager.Instance.GetItemCategories();
-
             filterCategories.Clear();
 
             foreach (ItemCategory itemCategory in itemCategories)
@@ -115,7 +115,7 @@ namespace ExordiumGamesAssignment.Scripts.Game
             this.username = username;
 
             string selectedCategoriesJson = PlayerPrefs.GetString(SelectedCategoriesKey + username);
-            if (IsJsonValid(selectedCategoriesJson))
+            if (IsJsonValid(selectedCategoriesJson, '{', '}'))
             {
                 filterCategories = (Dictionary<int, bool>)JsonConvert.DeserializeObject(selectedCategoriesJson, typeof(Dictionary<int, bool>));
             }
@@ -125,7 +125,7 @@ namespace ExordiumGamesAssignment.Scripts.Game
             }
 
             string selectedRetailersJson = PlayerPrefs.GetString(SelectedRetailersKey + username);
-            if (IsJsonValid(selectedRetailersJson))
+            if (IsJsonValid(selectedRetailersJson, '{', '}'))
             {
 
                 filterRetailers = (Dictionary<int, bool>)JsonConvert.DeserializeObject(selectedRetailersJson, typeof(Dictionary<int, bool>));
@@ -136,7 +136,7 @@ namespace ExordiumGamesAssignment.Scripts.Game
             }
 
             string selectedFavoritesJson = PlayerPrefs.GetString(SelectedFavoritesKey + username);
-            if (IsJsonValid(selectedFavoritesJson))
+            if (IsJsonValid(selectedFavoritesJson,'[', ']'))
             {
                 filterFavorites = (List<int>)JsonConvert.DeserializeObject(selectedFavoritesJson, typeof(List<int>));
             }
@@ -168,13 +168,11 @@ namespace ExordiumGamesAssignment.Scripts.Game
             return filterFavorites;
         }
 
-        public bool IsJsonValid(string input)
+        public bool IsJsonValid(string input, char char1, char char2)
         {
             if (input.Length > 2) return true;
             if (input.Length == 0) return false;
 
-            char char1 = '{';
-            char char2 = '}';
             int count1 = 0;
             int count2 = 0;
 

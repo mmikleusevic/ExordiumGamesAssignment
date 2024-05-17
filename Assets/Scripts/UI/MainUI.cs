@@ -33,7 +33,6 @@ namespace ExordiumGamesAssignment.Scripts.UI
                 DisableCurrentButtonEnableLast(itemsButton);
                 bottomUIPart.gameObject.SetActive(true);
                 StartCoroutine(uIManager.ActivateUIElement(itemsUI, () => StartCoroutine(itemsUI.Instantiate())));
-
             });
 
             categoryButton.onClick.AddListener(() =>
@@ -41,7 +40,6 @@ namespace ExordiumGamesAssignment.Scripts.UI
                 DisableCurrentButtonEnableLast(categoryButton);
                 bottomUIPart.gameObject.SetActive(true);
                 StartCoroutine(uIManager.ActivateUIElement(categoryUI, () => categoryUI.Instantiate()));
-
             });
 
             accountButton.onClick.AddListener(() =>
@@ -56,14 +54,13 @@ namespace ExordiumGamesAssignment.Scripts.UI
                 DisableCurrentButtonEnableLast(retailerButton);
                 bottomUIPart.gameObject.SetActive(true);
                 StartCoroutine(uIManager.ActivateUIElement(retailerUI, () => retailerUI.Instantiate()));
-
             });
 
             favoritesButton.onClick.AddListener(() =>
             {
                 DisableCurrentButtonEnableLast(favoritesButton);
                 bottomUIPart.gameObject.SetActive(true);
-                StartCoroutine(uIManager.ActivateUIElement(itemsUI, () => favoritesUI.Instantiate()));
+                StartCoroutine(uIManager.ActivateUIElement(favoritesUI, () => favoritesUI.Instantiate()));
             });
 
             settingsButton.onClick.AddListener(() =>

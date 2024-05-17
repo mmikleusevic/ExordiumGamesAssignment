@@ -21,6 +21,7 @@ namespace ExordiumGamesAssignment.Scripts.Game
         private UserServiceHandler userServiceHandler;
 
         private ItemCategory[] itemCategories;
+        private Item[] pagedItems;
         private Item[] items;
         private Retailer[] retailers;
 
@@ -40,14 +41,16 @@ namespace ExordiumGamesAssignment.Scripts.Game
         {
             yield return itemCategoriesServiceHandler.GetItemCategories((itemCategories) => this.itemCategories = itemCategories);
             yield return retailerServiceHandler.GetRetailers((retailers) => this.retailers = retailers);
+            yield return itemServiceHandler.GetAllItems((items) => this.items = items);
 
             UserSettingsManager.Instance.LoadDefaultSettings();
 
             fetchDataUI.SetActive(false);
             mainUI.TriggerItems();
+
         }
 
-        public Item[] GetItems()
+        public Item[] GetAllItems()
         {
             return items;
         }
@@ -74,8 +77,8 @@ namespace ExordiumGamesAssignment.Scripts.Game
 
         public IEnumerator LoadItems(Action<Item[]> callback)
         {
-            yield return itemServiceHandler.GetItems((items) => this.items = items);
-            callback?.Invoke(items);
+            yield return itemServiceHandler.GetPagedItems((pagedItems) => this.pagedItems = pagedItems);
+            callback?.Invoke(pagedItems);
         }
 
         public IEnumerator Register(Action<AuthenticationResponse> callback, User user)

@@ -8,7 +8,7 @@ namespace ExordiumGamesAssignment.Scripts.Api.Services
 {
     public class ItemServiceHandler : ApiServiceHandler
     {
-        public static int pageNumber = 1;
+        private int pageNumber = 1;
 
         [Serializable]
         private class ItemArrayWrapper
@@ -16,7 +16,7 @@ namespace ExordiumGamesAssignment.Scripts.Api.Services
             public Item[] root;
         }
 
-        public IEnumerator GetItems(Action<Item[]> callback)
+        public IEnumerator GetPagedItems(Action<Item[]> callback)
         {
             string uri = baseUrl + $"getitems.php?pageNumber={pageNumber}";
 
@@ -42,8 +42,34 @@ namespace ExordiumGamesAssignment.Scripts.Api.Services
                     string wrappedJsonString = "{\"root\":" + jsonString + "}";
 
                     ItemArrayWrapper wrapper = JsonUtility.FromJson<ItemArrayWrapper>(wrappedJsonString);
-
                     pageNumber++;
+
+                    callback?.Invoke(wrapper.root);
+                }
+            }
+        }
+
+        public IEnumerator GetAllItems(Action<Item[]> callback)
+        {
+            string uri = baseUrl + $"getitems.php";
+
+            using (UnityWebRequest request = UnityWebRequest.Get(uri))
+            {
+                yield return request.SendWebRequest();
+
+                if (request.result != UnityWebRequest.Result.Success)
+                {
+                    Debug.LogError(request.error);
+                    callback?.Invoke(null);
+                }
+                else
+                {
+                    string jsonString = request.downloadHandler.text;
+
+                    string wrappedJsonString = "{\"root\":" + jsonString + "}";
+
+                    ItemArrayWrapper wrapper = JsonUtility.FromJson<ItemArrayWrapper>(wrappedJsonString);
+
                     callback?.Invoke(wrapper.root);
                 }
             }

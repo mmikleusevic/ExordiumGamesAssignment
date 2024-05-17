@@ -18,7 +18,6 @@ namespace ExordiumGamesAssignment.Scripts.Game
 
                 if (request.result != UnityWebRequest.Result.Success)
                 {
-                    Debug.Log(request.error);
                     callback?.Invoke();
                 }
                 else
