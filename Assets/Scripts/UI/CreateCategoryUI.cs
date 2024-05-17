@@ -31,6 +31,11 @@ namespace ExordiumGamesAssignment.Scripts.UI
             ThemeManager.Instance.AddToggle(toggle);
         }
 
+        public void UpdateToggle(bool value)
+        {
+            toggle.isOn = value;
+        }
+
         private void OnDestroy()
         {
             toggle.onValueChanged.RemoveAllListeners();

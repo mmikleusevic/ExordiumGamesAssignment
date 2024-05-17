@@ -33,6 +33,7 @@ namespace ExordiumGamesAssignment.Scripts.UI
 
         private void OnDisable()
         {
+            scrollRect.verticalNormalizedPosition = 1;
             scrollRect.onValueChanged.RemoveAllListeners();
         }
 

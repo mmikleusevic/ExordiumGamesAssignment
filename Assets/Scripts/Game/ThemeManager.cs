@@ -127,6 +127,12 @@ namespace ExordiumGamesAssignment.Scripts.Game
             this.textElements.AddRange(textElements);
         }
 
+        public void RemoveTextElements(List<TextMeshProUGUI> textElements)
+        {
+            int indexFirst = this.textElements.IndexOf(textElements[0]);
+            this.textElements.RemoveRange(indexFirst, textElements.Count);
+        }
+
         public void AddTextElement(TextMeshProUGUI textElement)
         {
             textElements.Add(textElement);
@@ -142,9 +148,19 @@ namespace ExordiumGamesAssignment.Scripts.Game
             imageBackgrounds.Add(image);
         }
 
+        public void RemoveImage(Image image)
+        {
+            imageBackgrounds.Remove(image);
+        }
+
         public void AddOutline(Outline outline)
         {
             outlines.Add(outline);
+        }
+
+        public void Remove(Outline outline)
+        {
+            outlines.Remove(outline);
         }
 
         public void SetTheme(Theme theme)

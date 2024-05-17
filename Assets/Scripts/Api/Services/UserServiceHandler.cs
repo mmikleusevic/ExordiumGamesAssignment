@@ -1,4 +1,5 @@
 using ExordiumGamesAssignment.Scripts.Api.Models;
+using Newtonsoft.Json;
 using System;
 using System.Collections;
 using UnityEngine;
@@ -23,8 +24,7 @@ namespace ExordiumGamesAssignment.Scripts.Api.Services
 
             WWWForm form = new WWWForm();
 
-            form.AddField("username", user.Username);
-            form.AddField("password", user.Password);
+            form.AddField("json", JsonConvert.SerializeObject(user));
 
             using (UnityWebRequest request = UnityWebRequest.Post(uri, form))
             {

@@ -20,12 +20,42 @@ namespace ExordiumGamesAssignment.Scripts.UI
         {
             template.gameObject.SetActive(false);
             scrollRect.gameObject.SetActive(false);
+        }
+
+        private void Start()
+        {
+            UserSettingsManager.Instance.OnFiltersChanged += UserSettingsManager_OnFiltersChanged;
+
             gameObject.SetActive(false);
         }
 
         private void OnDisable()
         {
-            UserSettingsManager.Instance.SaveSelectedUserCategoriesSettings();
+            scrollRect.verticalNormalizedPosition = 1;
+            UserSettingsManager.Instance?.SaveSelectedUserCategoriesSettings();
+        }
+
+        private void OnDestroy()
+        {
+            UserSettingsManager.Instance.OnFiltersChanged -= UserSettingsManager_OnFiltersChanged;
+        }
+
+        private void UserSettingsManager_OnFiltersChanged()
+        {
+            ItemCategory[] itemCategories = GameManager.Instance.GetItemCategories();
+
+            int index = 0;
+            foreach (Transform child in container)
+            {
+                if (child == template) continue;
+
+                int id = itemCategories[index].id;
+
+                bool value = UserSettingsManager.Instance.GetFilterCategoryValue(id);
+                child.GetComponent<CreateCategoryUI>().UpdateToggle(value);
+
+                index++;
+            }
         }
 
         public void Instantiate()

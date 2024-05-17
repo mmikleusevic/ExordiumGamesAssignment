@@ -8,16 +8,17 @@ namespace ExordiumGamesAssignment.Scripts.UI
 {
     public class CreateItemUI : MonoBehaviour
     {
-        [SerializeField] private TextMeshProUGUI itemNameText;
-        [SerializeField] private TextMeshProUGUI retailerNameText;
-        [SerializeField] private TextMeshProUGUI priceText;
-        [SerializeField] private TextMeshProUGUI itemCategoryNameText;
-        [SerializeField] private ImageLoader imageLoader;
+        [SerializeField] protected TextMeshProUGUI itemNameText;
+        [SerializeField] protected TextMeshProUGUI retailerNameText;
+        [SerializeField] protected TextMeshProUGUI priceText;
+        [SerializeField] protected TextMeshProUGUI itemCategoryNameText;
+        [SerializeField] protected ImageLoader imageLoader;
+        [SerializeField] private Toggle favoriteToggle;
 
         public int categoryId = -1;
         public int retailerId = -1;
 
-        public void Instantiate(Item item)
+        public virtual void Instantiate(Item item)
         {
             StartCoroutine(imageLoader.LoadImageFromUrl(item.image_url, () => FilterItem()));
             categoryId = item.item_category_id;
@@ -26,6 +27,10 @@ namespace ExordiumGamesAssignment.Scripts.UI
             priceText.text = item.price.ToString("C");
             itemCategoryNameText.text = GameManager.Instance.GetItemCategory(item.item_category_id).name;
             retailerNameText.text = GameManager.Instance.GetRetailer(item.retailer_id).name;
+            favoriteToggle.onValueChanged.AddListener((value) =>
+            {
+
+            });
 
             ThemeManager.Instance.AddImage(GetComponent<Image>());
             ThemeManager.Instance.AddOutline(GetComponent<Outline>());
@@ -36,6 +41,11 @@ namespace ExordiumGamesAssignment.Scripts.UI
                 priceText,
                 itemCategoryNameText,
             });
+        }
+
+        private void OnDestroy()
+        {
+            favoriteToggle.onValueChanged.RemoveAllListeners();
         }
 
         private void FilterItem()

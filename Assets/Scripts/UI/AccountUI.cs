@@ -69,16 +69,16 @@ namespace ExordiumGamesAssignment.Scripts.UI
 
         private void CreateAccountUI_OnLoginSuccess()
         {
+            usernameText.gameObject.SetActive(true);
+            usernameText.text = emailInputField.text;
+
             registerButton.gameObject.SetActive(false);
             loginButton.gameObject.SetActive(false);
             emailInputField.gameObject.SetActive(false);
-            passwordInputField.gameObject.SetActive(true);
+            passwordInputField.gameObject.SetActive(false);
             emailText.gameObject.SetActive(false);
             passwordText.gameObject.SetActive(false);
-
             logoutButton.gameObject.SetActive(true);
-            usernameText.gameObject.SetActive(true);
-            usernameText.text = emailInputField.text;
 
             UserSettingsManager.Instance.LoadUserSettings(emailInputField.text);
         }
@@ -118,6 +118,8 @@ namespace ExordiumGamesAssignment.Scripts.UI
 
         private void Logout()
         {
+            UserSettingsManager.Instance.LoadDefaultSettings();
+
             registerButton.gameObject.SetActive(true);
             loginButton.gameObject.SetActive(true);
             emailInputField.gameObject.SetActive(true);
@@ -127,8 +129,6 @@ namespace ExordiumGamesAssignment.Scripts.UI
 
             logoutButton.gameObject.SetActive(false);
             usernameText.gameObject.SetActive(false);
-
-            UserSettingsManager.Instance.LoadDefaultSettings();
         }
     }
 }

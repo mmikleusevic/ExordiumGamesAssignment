@@ -57,9 +57,9 @@ namespace ExordiumGamesAssignment.Scripts.Game
             return retailers;
         }
 
-        public Retailer GetRetailer(int index)
+        public Retailer GetRetailer(int id)
         {
-            return retailers.FirstOrDefault(a => a.id == index);
+            return retailers.FirstOrDefault(a => a.id == id);
         }
 
         public ItemCategory[] GetItemCategories()
@@ -67,9 +67,9 @@ namespace ExordiumGamesAssignment.Scripts.Game
             return itemCategories;
         }
 
-        public ItemCategory GetItemCategory(int index)
+        public ItemCategory GetItemCategory(int id)
         {
-            return itemCategories.FirstOrDefault(a => a.id == index);
+            return itemCategories.FirstOrDefault(a => a.id == id);
         }
 
         public IEnumerator LoadItems(Action<Item[]> callback)

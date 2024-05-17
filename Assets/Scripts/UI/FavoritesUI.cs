@@ -1,37 +1,39 @@
 using ExordiumGamesAssignment.Scripts.Api.Models;
 using ExordiumGamesAssignment.Scripts.Game;
-using ExordiumGamesAssignment.Scripts.UI;
 using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Localization.Settings;
 
-public class FavoritesUI : ItemsUI
+namespace ExordiumGamesAssignment.Scripts.UI
 {
-    private readonly string FAVORITES = "favorites";
-
-    private void OnDisable()
+    public class FavoritesUI : ItemsUI
     {
-        UserSettingsManager.Instance.SaveSelectedUserFavoritesSettings();
-    }
+        private readonly string FAVORITES = "favorites";
 
-    public override IEnumerator Instantiate()
-    {
-        headerText.text = LocalizationSettings.StringDatabase.GetLocalizedString(LocaleSelector.Instance.STRING_TABLE, FAVORITES);
-        Item[] newItems = null;
-
-        yield return StartCoroutine(GameManager.Instance.LoadItems((items) => newItems = items));
-
-        if (newItems == null) yield break;
-
-        foreach (Item item in newItems)
+        public override IEnumerator Instantiate()
         {
-            Transform itemUITransform = Instantiate(template, container);
-            itemUITransform.gameObject.SetActive(true);
+            headerText.text = LocalizationSettings.StringDatabase.GetLocalizedString(LocaleSelector.Instance.STRING_TABLE, FAVORITES);
+            Item[] newItems = null;
 
-            CreateItemUI createItemUI = itemUITransform.GetComponent<CreateItemUI>();
-            createItemUI.Instantiate(item);
+            yield return StartCoroutine(GameManager.Instance.LoadItems((items) => newItems = items));
+
+            if (newItems == null) yield break;
+
+            List<int> favoriteIds = UserSettingsManager.Instance.GetFavorites();
+            List<Item> favorites = newItems.Where(item => favoriteIds.Contains(item.id)).ToList();
+
+            foreach (Item item in newItems)
+            {
+                Transform itemUITransform = Instantiate(template, container);
+                itemUITransform.gameObject.SetActive(true);
+
+                CreateItemUI createItemUI = itemUITransform.GetComponent<CreateItemUI>();
+                createItemUI.Instantiate(item);
+            }
+
+            yield return new WaitForSeconds(1f);
         }
-
-        yield return new WaitForSeconds(1f);
     }
 }

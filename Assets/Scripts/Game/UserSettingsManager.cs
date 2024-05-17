@@ -1,121 +1,202 @@
 using ExordiumGamesAssignment.Scripts.Api.Models;
-using ExordiumGamesAssignment.Scripts.Game;
+using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class UserSettingsManager : MonoBehaviour
+namespace ExordiumGamesAssignment.Scripts.Game
 {
-    public static UserSettingsManager Instance { get; private set; }
-
-    private const string SelectedCategoriesKey = "SelectedCategories";
-    private const string SelectedRetailersKey = "SelectedRetailers";
-    private const string SelectedFavoritesKey = "SelectedFavorites";
-
-    private Dictionary<int, bool> filterCategories;
-    private Dictionary<int, bool> filterRetailers;
-    private List<int> filterFavorites;
-
-    private string username;
-
-    private void Awake()
+    public class UserSettingsManager : MonoBehaviour
     {
-        Instance = this;
+        public static UserSettingsManager Instance { get; private set; }
 
-        filterCategories = new Dictionary<int, bool>();
-        filterRetailers = new Dictionary<int, bool>();
-        filterFavorites = new List<int>();
-    }
+        public event Action OnFiltersChanged;
 
-    public void SaveSelectedUserRetailersSettings()
-    {
-        string selectedRetailersJson = JsonUtility.ToJson(filterRetailers);
+        private const string SelectedCategoriesKey = "SelectedCategories";
+        private const string SelectedRetailersKey = "SelectedRetailers";
+        private const string SelectedFavoritesKey = "SelectedFavorites";
 
-        PlayerPrefs.SetString(SelectedRetailersKey + username, selectedRetailersJson);
-        PlayerPrefs.Save();
-    }
+        private Dictionary<int, bool> filterCategories;
+        private Dictionary<int, bool> filterRetailers;
+        private List<int> filterFavorites;
 
-    public void SaveSelectedUserCategoriesSettings()
-    {
-        string selectedCategoriesJson = JsonUtility.ToJson(filterCategories);
+        private string username;
 
-        PlayerPrefs.SetString(SelectedCategoriesKey + username, selectedCategoriesJson);
-        PlayerPrefs.Save();
-    }
-
-    public void SaveSelectedUserFavoritesSettings()
-    {
-        string selectedFavoritesJson = JsonUtility.ToJson(filterFavorites);
-
-        PlayerPrefs.SetString(SelectedFavoritesKey + username, selectedFavoritesJson);
-        PlayerPrefs.Save();
-    }
-
-    public void UpdateFilterCategory(int id, bool value)
-    {
-        filterCategories[id] = value;
-    }
-
-    public void UpdateFilterRetailer(int id, bool value)
-    {
-        filterRetailers[id] = value;
-    }
-
-    public void UpdateFavorite(int id)
-    {
-        filterFavorites.Add(id);
-    }
-
-    public void LoadDefaultSettings()
-    {
-        username = "default";
-
-        ItemCategory[] itemCategories = GameManager.Instance.GetItemCategories();
-        Retailer[] retailers = GameManager.Instance.GetRetailers();
-
-        foreach (ItemCategory itemCategory in itemCategories)
+        private void Awake()
         {
-            filterCategories.Add(itemCategory.id, true);
+            Instance = this;
+
+            filterCategories = new Dictionary<int, bool>();
+            filterRetailers = new Dictionary<int, bool>();
+            filterFavorites = new List<int>();
         }
 
-        foreach (Retailer retailer in retailers)
+        public void SaveSelectedUserRetailersSettings()
         {
-            filterRetailers.Add(retailer.id, true);
+            string selectedRetailersJson = JsonConvert.SerializeObject(filterRetailers);
+
+            PlayerPrefs.SetString(SelectedRetailersKey + username, selectedRetailersJson);
+            PlayerPrefs.Save();
         }
 
-        filterFavorites.Clear();
-    }
+        public void SaveSelectedUserCategoriesSettings()
+        {
+            string selectedCategoriesJson = JsonConvert.SerializeObject(filterCategories);
 
-    public void LoadUserSettings(string username)
-    {
-        this.username = username;
+            PlayerPrefs.SetString(SelectedCategoriesKey + username, selectedCategoriesJson);
+            PlayerPrefs.Save();
+        }
 
-        string selectedCategoriesJson = PlayerPrefs.GetString(SelectedCategoriesKey + username);
-        filterCategories = JsonUtility.FromJson<Dictionary<int, bool>>(selectedCategoriesJson);
+        public void SaveSelectedUserFavoritesSettings()
+        {
+            string selectedFavoritesJson = JsonConvert.SerializeObject(filterFavorites);
 
-        string selectedRetailersJson = PlayerPrefs.GetString(SelectedRetailersKey + username);
-        filterRetailers = JsonUtility.FromJson<Dictionary<int, bool>>(selectedRetailersJson);
+            PlayerPrefs.SetString(SelectedFavoritesKey + username, selectedFavoritesJson);
+            PlayerPrefs.Save();
+        }
 
-        string selectedFavoritesJson = PlayerPrefs.GetString(SelectedFavoritesKey + username);
-        filterFavorites = JsonUtility.FromJson<List<int>>(selectedFavoritesJson);
-    }
+        public void UpdateFilterCategory(int id, bool value)
+        {
+            filterCategories[id] = value;
+        }
 
-    public bool GetFilterCategoryValue(int id)
-    {
-        return filterCategories[id];
-    }
+        public void UpdateFilterRetailer(int id, bool value)
+        {
+            filterRetailers[id] = value;
+        }
 
-    public bool GetFilterRetailerValue(int id)
-    {
-        return filterRetailers[id];
-    }
+        public void AddFavorite(int id)
+        {
+            filterFavorites.Add(id);
+        }
 
-    public bool GetFilterFavoriteValue(int id)
-    {
-        return filterFavorites.Contains(id);
-    }
+        public void RemoveFavorite(int id)
+        {
+            filterFavorites.Remove(id);
+        }
 
-    public List<int> GetFavorites()
-    {
-        return filterFavorites;
+        public void LoadDefaultSettings()
+        {
+            username = "default";
+
+            LoadDefaultCategories();
+            LoadDefaultRetailers();
+
+            filterFavorites.Clear();
+
+            OnFiltersChanged?.Invoke();
+        }
+
+        private void LoadDefaultCategories()
+        {
+            ItemCategory[] itemCategories = GameManager.Instance.GetItemCategories();
+
+            filterCategories.Clear();
+
+            foreach (ItemCategory itemCategory in itemCategories)
+            {
+                filterCategories.Add(itemCategory.id, true);
+            }
+        }
+
+        private void LoadDefaultRetailers()
+        {
+            Retailer[] retailers = GameManager.Instance.GetRetailers();
+            filterRetailers.Clear();
+
+            foreach (Retailer retailer in retailers)
+            {
+                filterRetailers.Add(retailer.id, true);
+            }
+        }
+
+        public void LoadUserSettings(string username)
+        {
+            this.username = username;
+
+            string selectedCategoriesJson = PlayerPrefs.GetString(SelectedCategoriesKey + username);
+            if (IsJsonValid(selectedCategoriesJson))
+            {
+                filterCategories = (Dictionary<int, bool>)JsonConvert.DeserializeObject(selectedCategoriesJson, typeof(Dictionary<int, bool>));
+            }
+            else
+            {
+                LoadDefaultCategories();
+            }
+
+            string selectedRetailersJson = PlayerPrefs.GetString(SelectedRetailersKey + username);
+            if (IsJsonValid(selectedRetailersJson))
+            {
+
+                filterRetailers = (Dictionary<int, bool>)JsonConvert.DeserializeObject(selectedRetailersJson, typeof(Dictionary<int, bool>));
+            }
+            else
+            {
+                LoadDefaultRetailers();
+            }
+
+            string selectedFavoritesJson = PlayerPrefs.GetString(SelectedFavoritesKey + username);
+            if (IsJsonValid(selectedFavoritesJson))
+            {
+                filterFavorites = (List<int>)JsonConvert.DeserializeObject(selectedFavoritesJson, typeof(List<int>));
+            }
+            else
+            {
+                filterFavorites.Clear();
+            }
+
+            OnFiltersChanged?.Invoke();
+        }
+
+        public bool GetFilterCategoryValue(int id)
+        {
+            return filterCategories[id];
+        }
+
+        public bool GetFilterRetailerValue(int id)
+        {
+            return filterRetailers[id];
+        }
+
+        public bool GetFilterFavoriteValue(int id)
+        {
+            return filterFavorites.Contains(id);
+        }
+
+        public List<int> GetFavorites()
+        {
+            return filterFavorites;
+        }
+
+        public bool IsJsonValid(string input)
+        {
+            if (input.Length > 2) return true;
+            if (input.Length == 0) return false;
+
+            char char1 = '{';
+            char char2 = '}';
+            int count1 = 0;
+            int count2 = 0;
+
+            foreach (char c in input)
+            {
+                if (c == char1)
+                {
+                    count1++;
+                }
+                else if (c == char2)
+                {
+                    count2++;
+                }
+                else
+                {
+                    return true;
+                }
+
+                if (count1 > 1 || count2 > 1) return true;
+            }
+
+            return (count1 + count2) != 2;
+        }
     }
 }
