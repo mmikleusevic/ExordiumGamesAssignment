@@ -1,10 +1,19 @@
+using System;
 using System.Net.Http;
 
 namespace ExordiumGamesAssignment.Scripts.Api.Services
 {
     public class ApiServiceHandler
     {
-        protected static readonly HttpClient httpClient = new HttpClient();
-        protected readonly string baseUrl = "https://exordiumgames.com/unity_backend_assignment/";
+        protected readonly string baseUrl;
+
+        public ApiServiceHandler()
+        {
+            baseUrl = Environment.GetEnvironmentVariable("BASE_URL");
+            if (string.IsNullOrEmpty(baseUrl))
+            {
+                throw new InvalidOperationException("BASE_URL environment variable is not set.");
+            }
+        }
     }
 }
