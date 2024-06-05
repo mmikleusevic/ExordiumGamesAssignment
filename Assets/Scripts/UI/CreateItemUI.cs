@@ -60,7 +60,7 @@ namespace ExordiumGamesAssignment.Scripts.UI
             else
             {
                 gameObject.SetActive(false);
-            }          
+            }
         }
 
         public Item GetItem()

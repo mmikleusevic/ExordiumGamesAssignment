@@ -10,7 +10,7 @@ on:
 
 jobs:
   build:
-    runs-on: windows
+    runs-on: windows-latest
 
     steps:
     - name: Checkout code
@@ -19,13 +19,18 @@ jobs:
     - name: Setup .NET
       uses: actions/setup-dotnet@v1
       with:
-        dotnet-version: '4.x'
+        dotnet-version: '3.1.x'
 
     - name: Restore dependencies
       run: dotnet restore
 
     - name: Build
       run: dotnet build --configuration Release
+
+    - name: Print BASE_URL
+      run: echo "BASE_URL is $BASE_URL"
+      env:
+        BASE_URL: ${{ secrets.BASE_URL }}
 
     - name: Run tests
       run: dotnet test --configuration Release

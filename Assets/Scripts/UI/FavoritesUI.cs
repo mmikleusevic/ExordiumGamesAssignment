@@ -24,7 +24,7 @@ namespace ExordiumGamesAssignment.Scripts.UI
         {
             favoriteItems = new List<Item>();
 
-            template.gameObject.SetActive(false);            
+            template.gameObject.SetActive(false);
 
             gameObject.SetActive(false);
 

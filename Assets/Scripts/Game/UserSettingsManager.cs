@@ -1,5 +1,4 @@
 using ExordiumGamesAssignment.Scripts.Api.Models;
-using ExordiumGamesAssignment.Scripts.UI;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -136,7 +135,7 @@ namespace ExordiumGamesAssignment.Scripts.Game
             }
 
             string selectedFavoritesJson = PlayerPrefs.GetString(SelectedFavoritesKey + username);
-            if (IsJsonValid(selectedFavoritesJson,'[', ']'))
+            if (IsJsonValid(selectedFavoritesJson, '[', ']'))
             {
                 filterFavorites = (List<int>)JsonConvert.DeserializeObject(selectedFavoritesJson, typeof(List<int>));
             }
