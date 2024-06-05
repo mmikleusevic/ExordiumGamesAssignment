@@ -1,4 +1,5 @@
 using System;
+using UnityEngine;
 
 namespace ExordiumGamesAssignment.Scripts.Api.Services
 {
@@ -8,11 +9,7 @@ namespace ExordiumGamesAssignment.Scripts.Api.Services
 
         public ApiServiceHandler()
         {
-            baseUrl = Environment.GetEnvironmentVariable("BASE_URL");
-            if (string.IsNullOrEmpty(baseUrl))
-            {
-                throw new InvalidOperationException("BASE_URL environment variable is not set.");
-            }
+            baseUrl = Environment.GetEnvironmentVariable("BASE_URL", EnvironmentVariableTarget.Process);
         }
     }
 }
